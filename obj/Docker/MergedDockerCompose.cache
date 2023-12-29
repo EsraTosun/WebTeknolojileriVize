@@ -1,0 +1,16 @@
+name: dockercompose1625329723077191003
+services:
+  saglikwebuygulamasi1:
+    build:
+      context: C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1
+      dockerfile: Dockerfile
+    image: saglikwebuygulamasi1
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        protocol: tcp
+networks:
+  default:
+    name: dockercompose1625329723077191003_default

@@ -1,0 +1,879 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SaglikDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bolum">
+          <Key>
+            <PropertyRef Name="BolumID" />
+          </Key>
+          <Property Name="BolumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolumAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doktor">
+          <Key>
+            <PropertyRef Name="DoktorID" />
+          </Key>
+          <Property Name="DoktorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoktorAd" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoktorSoyad" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="BolumID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hasta">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+          </Key>
+          <Property Name="HastaTC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HastaAd" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="HastaSoyad" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="HastaTel" Type="int" Nullable="false" />
+          <Property Name="HastaCinsiyet" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="HastaDogumTarihi" Type="date" Nullable="false" />
+          <Property Name="HastaYas" Type="int" Nullable="false" />
+          <Property Name="HastaKanGrubu" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Hastalik">
+          <Key>
+            <PropertyRef Name="HastalikID" />
+          </Key>
+          <Property Name="HastalikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HastalikAd" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HastalikBilgisi">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+            <PropertyRef Name="HastalikID" />
+            <PropertyRef Name="HastalikTeshisTarihi" />
+          </Key>
+          <Property Name="HastaTC" Type="int" Nullable="false" />
+          <Property Name="HastalikID" Type="int" Nullable="false" />
+          <Property Name="IlacID" Type="int" Nullable="false" />
+          <Property Name="HastalikTeshisTarihi" Type="date" Nullable="false" />
+          <Property Name="HastalikIyilestigiTarih" Type="date" />
+        </EntityType>
+        <EntityType Name="Hastane">
+          <Key>
+            <PropertyRef Name="HastaneID" />
+          </Key>
+          <Property Name="HastaneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HastaneAd" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="IlID" Type="int" Nullable="false" />
+          <Property Name="IlceID" Type="int" Nullable="false" />
+          <Property Name="HastaneAdresi" Type="nchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HastaneBilgisi">
+          <Key>
+            <PropertyRef Name="HastaneBilgisiID" />
+          </Key>
+          <Property Name="HastaneBilgisiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HastaneID" Type="int" Nullable="false" />
+          <Property Name="DoktorID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Il">
+          <Key>
+            <PropertyRef Name="IlID" />
+          </Key>
+          <Property Name="IlID" Type="int" Nullable="false" />
+          <Property Name="IlAd" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ilac">
+          <Key>
+            <PropertyRef Name="IlacID" />
+          </Key>
+          <Property Name="IlacID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IlacAd" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ilce">
+          <Key>
+            <PropertyRef Name="IlceID" />
+          </Key>
+          <Property Name="IlceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IlceAd" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+          </Key>
+          <Property Name="HastaTC" Type="int" Nullable="false" />
+          <Property Name="HasraPassword" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Randevu">
+          <Key>
+            <PropertyRef Name="RandevuTarihi" />
+            <PropertyRef Name="RandevuSaati" />
+          </Key>
+          <Property Name="HastaTC" Type="int" Nullable="false" />
+          <Property Name="HastaneBilgisiID" Type="int" Nullable="false" />
+          <Property Name="RandevuTarihi" Type="date" Nullable="false" />
+          <Property Name="RandevuSaati" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TahlilBilgisi">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+            <PropertyRef Name="TahlilTarihi" />
+          </Key>
+          <Property Name="HastaTC" Type="int" Nullable="false" />
+          <Property Name="TahlilTarihi" Type="date" Nullable="false" />
+          <Property Name="Glukoz" Type="float" Nullable="false" />
+          <Property Name="Kolestrol" Type="float" Nullable="false" />
+          <Property Name="Hemoglobin" Type="float" Nullable="false" />
+          <Property Name="KanBasıncı" Type="float" Nullable="false" />
+          <Property Name="B12" Type="float" Nullable="false" />
+          <Property Name="A" Type="float" Nullable="false" />
+          <Property Name="Kalsiyum" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Doktor_Bolum">
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="1" />
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="BolumID" />
+            </Principal>
+            <Dependent Role="Doktor">
+              <PropertyRef Name="BolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastalikBilgisi_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="HastalikBilgisi" Type="Self.HastalikBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="HastaTC" />
+            </Principal>
+            <Dependent Role="HastalikBilgisi">
+              <PropertyRef Name="HastaTC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastalikBilgisi_Hastalik">
+          <End Role="Hastalik" Type="Self.Hastalik" Multiplicity="1" />
+          <End Role="HastalikBilgisi" Type="Self.HastalikBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hastalik">
+              <PropertyRef Name="HastalikID" />
+            </Principal>
+            <Dependent Role="HastalikBilgisi">
+              <PropertyRef Name="HastalikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastalikBilgisi_Ilac">
+          <End Role="Ilac" Type="Self.Ilac" Multiplicity="1" />
+          <End Role="HastalikBilgisi" Type="Self.HastalikBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilac">
+              <PropertyRef Name="IlacID" />
+            </Principal>
+            <Dependent Role="HastalikBilgisi">
+              <PropertyRef Name="IlacID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hastane_Il">
+          <End Role="Il" Type="Self.Il" Multiplicity="1" />
+          <End Role="Hastane" Type="Self.Hastane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Il">
+              <PropertyRef Name="IlID" />
+            </Principal>
+            <Dependent Role="Hastane">
+              <PropertyRef Name="IlID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hastane_Ilce">
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="1" />
+          <End Role="Hastane" Type="Self.Hastane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilce">
+              <PropertyRef Name="IlceID" />
+            </Principal>
+            <Dependent Role="Hastane">
+              <PropertyRef Name="IlceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneBilgisi_Doktor">
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="1" />
+          <End Role="HastaneBilgisi" Type="Self.HastaneBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktor">
+              <PropertyRef Name="DoktorID" />
+            </Principal>
+            <Dependent Role="HastaneBilgisi">
+              <PropertyRef Name="DoktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneBilgisi_Hastane">
+          <End Role="Hastane" Type="Self.Hastane" Multiplicity="1" />
+          <End Role="HastaneBilgisi" Type="Self.HastaneBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hastane">
+              <PropertyRef Name="HastaneID" />
+            </Principal>
+            <Dependent Role="HastaneBilgisi">
+              <PropertyRef Name="HastaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="HastaTC" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="HastaTC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="HastaTC" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="HastaTC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_HastaneBilgisi">
+          <End Role="HastaneBilgisi" Type="Self.HastaneBilgisi" Multiplicity="1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HastaneBilgisi">
+              <PropertyRef Name="HastaneBilgisiID" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="HastaneBilgisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TahlilBilgisi_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="TahlilBilgisi" Type="Self.TahlilBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="HastaTC" />
+            </Principal>
+            <Dependent Role="TahlilBilgisi">
+              <PropertyRef Name="HastaTC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SaglikDBModelStoreContainer">
+          <EntitySet Name="Bolum" EntityType="Self.Bolum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doktor" EntityType="Self.Doktor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hasta" EntityType="Self.Hasta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hastalik" EntityType="Self.Hastalik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HastalikBilgisi" EntityType="Self.HastalikBilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hastane" EntityType="Self.Hastane" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HastaneBilgisi" EntityType="Self.HastaneBilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Il" EntityType="Self.Il" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ilac" EntityType="Self.Ilac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ilce" EntityType="Self.Ilce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Randevu" EntityType="Self.Randevu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TahlilBilgisi" EntityType="Self.TahlilBilgisi" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Doktor_Bolum" Association="Self.FK_Doktor_Bolum">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="Doktor" EntitySet="Doktor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastalikBilgisi_Hasta" Association="Self.FK_HastalikBilgisi_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="HastalikBilgisi" EntitySet="HastalikBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastalikBilgisi_Hastalik" Association="Self.FK_HastalikBilgisi_Hastalik">
+            <End Role="Hastalik" EntitySet="Hastalik" />
+            <End Role="HastalikBilgisi" EntitySet="HastalikBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastalikBilgisi_Ilac" Association="Self.FK_HastalikBilgisi_Ilac">
+            <End Role="Ilac" EntitySet="Ilac" />
+            <End Role="HastalikBilgisi" EntitySet="HastalikBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hastane_Il" Association="Self.FK_Hastane_Il">
+            <End Role="Il" EntitySet="Il" />
+            <End Role="Hastane" EntitySet="Hastane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hastane_Ilce" Association="Self.FK_Hastane_Ilce">
+            <End Role="Ilce" EntitySet="Ilce" />
+            <End Role="Hastane" EntitySet="Hastane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneBilgisi_Doktor" Association="Self.FK_HastaneBilgisi_Doktor">
+            <End Role="Doktor" EntitySet="Doktor" />
+            <End Role="HastaneBilgisi" EntitySet="HastaneBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneBilgisi_Hastane" Association="Self.FK_HastaneBilgisi_Hastane">
+            <End Role="Hastane" EntitySet="Hastane" />
+            <End Role="HastaneBilgisi" EntitySet="HastaneBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Hasta" Association="Self.FK_Login_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_Hasta" Association="Self.FK_Randevu_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_HastaneBilgisi" Association="Self.FK_Randevu_HastaneBilgisi">
+            <End Role="HastaneBilgisi" EntitySet="HastaneBilgisi" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TahlilBilgisi_Hasta" Association="Self.FK_TahlilBilgisi_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="TahlilBilgisi" EntitySet="TahlilBilgisi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SaglikDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bolum">
+          <Key>
+            <PropertyRef Name="BolumID" />
+          </Key>
+          <Property Name="BolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolumAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Doktor" Relationship="Self.FK_Doktor_Bolum" FromRole="Bolum" ToRole="Doktor" />
+        </EntityType>
+        <EntityType Name="Doktor">
+          <Key>
+            <PropertyRef Name="DoktorID" />
+          </Key>
+          <Property Name="DoktorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoktorAd" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DoktorSoyad" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BolumID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bolum" Relationship="Self.FK_Doktor_Bolum" FromRole="Doktor" ToRole="Bolum" />
+          <NavigationProperty Name="HastaneBilgisi" Relationship="Self.FK_HastaneBilgisi_Doktor" FromRole="Doktor" ToRole="HastaneBilgisi" />
+        </EntityType>
+        <EntityType Name="Hasta">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+          </Key>
+          <Property Name="HastaTC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HastaAd" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="HastaSoyad" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="HastaTel" Type="Int32" Nullable="false" />
+          <Property Name="HastaCinsiyet" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="HastaDogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HastaYas" Type="Int32" Nullable="false" />
+          <Property Name="HastaKanGrubu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="HastalikBilgisi" Relationship="Self.FK_HastalikBilgisi_Hasta" FromRole="Hasta" ToRole="HastalikBilgisi" />
+          <NavigationProperty Name="Login" Relationship="Self.FK_Login_Hasta" FromRole="Hasta" ToRole="Login" />
+          <NavigationProperty Name="Randevu" Relationship="Self.FK_Randevu_Hasta" FromRole="Hasta" ToRole="Randevu" />
+          <NavigationProperty Name="TahlilBilgisi" Relationship="Self.FK_TahlilBilgisi_Hasta" FromRole="Hasta" ToRole="TahlilBilgisi" />
+        </EntityType>
+        <EntityType Name="Hastalik">
+          <Key>
+            <PropertyRef Name="HastalikID" />
+          </Key>
+          <Property Name="HastalikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HastalikAd" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HastalikBilgisi" Relationship="Self.FK_HastalikBilgisi_Hastalik" FromRole="Hastalik" ToRole="HastalikBilgisi" />
+        </EntityType>
+        <EntityType Name="HastalikBilgisi">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+            <PropertyRef Name="HastalikID" />
+            <PropertyRef Name="HastalikTeshisTarihi" />
+          </Key>
+          <Property Name="HastaTC" Type="Int32" Nullable="false" />
+          <Property Name="HastalikID" Type="Int32" Nullable="false" />
+          <Property Name="IlacID" Type="Int32" Nullable="false" />
+          <Property Name="HastalikTeshisTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HastalikIyilestigiTarih" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK_HastalikBilgisi_Hasta" FromRole="HastalikBilgisi" ToRole="Hasta" />
+          <NavigationProperty Name="Hastalik" Relationship="Self.FK_HastalikBilgisi_Hastalik" FromRole="HastalikBilgisi" ToRole="Hastalik" />
+          <NavigationProperty Name="Ilac" Relationship="Self.FK_HastalikBilgisi_Ilac" FromRole="HastalikBilgisi" ToRole="Ilac" />
+        </EntityType>
+        <EntityType Name="Hastane">
+          <Key>
+            <PropertyRef Name="HastaneID" />
+          </Key>
+          <Property Name="HastaneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HastaneAd" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IlID" Type="Int32" Nullable="false" />
+          <Property Name="IlceID" Type="Int32" Nullable="false" />
+          <Property Name="HastaneAdresi" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Il" Relationship="Self.FK_Hastane_Il" FromRole="Hastane" ToRole="Il" />
+          <NavigationProperty Name="Ilce" Relationship="Self.FK_Hastane_Ilce" FromRole="Hastane" ToRole="Ilce" />
+          <NavigationProperty Name="HastaneBilgisi" Relationship="Self.FK_HastaneBilgisi_Hastane" FromRole="Hastane" ToRole="HastaneBilgisi" />
+        </EntityType>
+        <EntityType Name="HastaneBilgisi">
+          <Key>
+            <PropertyRef Name="HastaneBilgisiID" />
+          </Key>
+          <Property Name="HastaneBilgisiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HastaneID" Type="Int32" Nullable="false" />
+          <Property Name="DoktorID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doktor" Relationship="Self.FK_HastaneBilgisi_Doktor" FromRole="HastaneBilgisi" ToRole="Doktor" />
+          <NavigationProperty Name="Hastane" Relationship="Self.FK_HastaneBilgisi_Hastane" FromRole="HastaneBilgisi" ToRole="Hastane" />
+          <NavigationProperty Name="Randevu" Relationship="Self.FK_Randevu_HastaneBilgisi" FromRole="HastaneBilgisi" ToRole="Randevu" />
+        </EntityType>
+        <EntityType Name="Il">
+          <Key>
+            <PropertyRef Name="IlID" />
+          </Key>
+          <Property Name="IlID" Type="Int32" Nullable="false" />
+          <Property Name="IlAd" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Hastane" Relationship="Self.FK_Hastane_Il" FromRole="Il" ToRole="Hastane" />
+        </EntityType>
+        <EntityType Name="Ilac">
+          <Key>
+            <PropertyRef Name="IlacID" />
+          </Key>
+          <Property Name="IlacID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IlacAd" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HastalikBilgisi" Relationship="Self.FK_HastalikBilgisi_Ilac" FromRole="Ilac" ToRole="HastalikBilgisi" />
+        </EntityType>
+        <EntityType Name="Ilce">
+          <Key>
+            <PropertyRef Name="IlceID" />
+          </Key>
+          <Property Name="IlceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IlceAd" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Hastane" Relationship="Self.FK_Hastane_Ilce" FromRole="Ilce" ToRole="Hastane" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+          </Key>
+          <Property Name="HastaTC" Type="Int32" Nullable="false" />
+          <Property Name="HasraPassword" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK_Login_Hasta" FromRole="Login" ToRole="Hasta" />
+        </EntityType>
+        <EntityType Name="Randevu">
+          <Key>
+            <PropertyRef Name="RandevuTarihi" />
+            <PropertyRef Name="RandevuSaati" />
+          </Key>
+          <Property Name="HastaTC" Type="Int32" Nullable="false" />
+          <Property Name="HastaneBilgisiID" Type="Int32" Nullable="false" />
+          <Property Name="RandevuTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RandevuSaati" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK_Randevu_Hasta" FromRole="Randevu" ToRole="Hasta" />
+          <NavigationProperty Name="HastaneBilgisi" Relationship="Self.FK_Randevu_HastaneBilgisi" FromRole="Randevu" ToRole="HastaneBilgisi" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TahlilBilgisi">
+          <Key>
+            <PropertyRef Name="HastaTC" />
+            <PropertyRef Name="TahlilTarihi" />
+          </Key>
+          <Property Name="HastaTC" Type="Int32" Nullable="false" />
+          <Property Name="TahlilTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Glukoz" Type="Double" Nullable="false" />
+          <Property Name="Kolestrol" Type="Double" Nullable="false" />
+          <Property Name="Hemoglobin" Type="Double" Nullable="false" />
+          <Property Name="KanBasıncı" Type="Double" Nullable="false" />
+          <Property Name="B12" Type="Double" Nullable="false" />
+          <Property Name="A" Type="Double" Nullable="false" />
+          <Property Name="Kalsiyum" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK_TahlilBilgisi_Hasta" FromRole="TahlilBilgisi" ToRole="Hasta" />
+        </EntityType>
+        <Association Name="FK_Doktor_Bolum">
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="1" />
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="BolumID" />
+            </Principal>
+            <Dependent Role="Doktor">
+              <PropertyRef Name="BolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneBilgisi_Doktor">
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="1" />
+          <End Role="HastaneBilgisi" Type="Self.HastaneBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktor">
+              <PropertyRef Name="DoktorID" />
+            </Principal>
+            <Dependent Role="HastaneBilgisi">
+              <PropertyRef Name="DoktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastalikBilgisi_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="HastalikBilgisi" Type="Self.HastalikBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="HastaTC" />
+            </Principal>
+            <Dependent Role="HastalikBilgisi">
+              <PropertyRef Name="HastaTC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="HastaTC" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="HastaTC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="HastaTC" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="HastaTC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TahlilBilgisi_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="TahlilBilgisi" Type="Self.TahlilBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="HastaTC" />
+            </Principal>
+            <Dependent Role="TahlilBilgisi">
+              <PropertyRef Name="HastaTC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastalikBilgisi_Hastalik">
+          <End Role="Hastalik" Type="Self.Hastalik" Multiplicity="1" />
+          <End Role="HastalikBilgisi" Type="Self.HastalikBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hastalik">
+              <PropertyRef Name="HastalikID" />
+            </Principal>
+            <Dependent Role="HastalikBilgisi">
+              <PropertyRef Name="HastalikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastalikBilgisi_Ilac">
+          <End Role="Ilac" Type="Self.Ilac" Multiplicity="1" />
+          <End Role="HastalikBilgisi" Type="Self.HastalikBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilac">
+              <PropertyRef Name="IlacID" />
+            </Principal>
+            <Dependent Role="HastalikBilgisi">
+              <PropertyRef Name="IlacID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hastane_Il">
+          <End Role="Il" Type="Self.Il" Multiplicity="1" />
+          <End Role="Hastane" Type="Self.Hastane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Il">
+              <PropertyRef Name="IlID" />
+            </Principal>
+            <Dependent Role="Hastane">
+              <PropertyRef Name="IlID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hastane_Ilce">
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="1" />
+          <End Role="Hastane" Type="Self.Hastane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilce">
+              <PropertyRef Name="IlceID" />
+            </Principal>
+            <Dependent Role="Hastane">
+              <PropertyRef Name="IlceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneBilgisi_Hastane">
+          <End Role="Hastane" Type="Self.Hastane" Multiplicity="1" />
+          <End Role="HastaneBilgisi" Type="Self.HastaneBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hastane">
+              <PropertyRef Name="HastaneID" />
+            </Principal>
+            <Dependent Role="HastaneBilgisi">
+              <PropertyRef Name="HastaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_HastaneBilgisi">
+          <End Role="HastaneBilgisi" Type="Self.HastaneBilgisi" Multiplicity="1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HastaneBilgisi">
+              <PropertyRef Name="HastaneBilgisiID" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="HastaneBilgisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SaglikDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bolum" EntityType="Self.Bolum" />
+          <EntitySet Name="Doktor" EntityType="Self.Doktor" />
+          <EntitySet Name="Hasta" EntityType="Self.Hasta" />
+          <EntitySet Name="Hastalik" EntityType="Self.Hastalik" />
+          <EntitySet Name="HastalikBilgisi" EntityType="Self.HastalikBilgisi" />
+          <EntitySet Name="Hastane" EntityType="Self.Hastane" />
+          <EntitySet Name="HastaneBilgisi" EntityType="Self.HastaneBilgisi" />
+          <EntitySet Name="Il" EntityType="Self.Il" />
+          <EntitySet Name="Ilac" EntityType="Self.Ilac" />
+          <EntitySet Name="Ilce" EntityType="Self.Ilce" />
+          <EntitySet Name="Login" EntityType="Self.Login" />
+          <EntitySet Name="Randevu" EntityType="Self.Randevu" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TahlilBilgisi" EntityType="Self.TahlilBilgisi" />
+          <AssociationSet Name="FK_Doktor_Bolum" Association="Self.FK_Doktor_Bolum">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="Doktor" EntitySet="Doktor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneBilgisi_Doktor" Association="Self.FK_HastaneBilgisi_Doktor">
+            <End Role="Doktor" EntitySet="Doktor" />
+            <End Role="HastaneBilgisi" EntitySet="HastaneBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastalikBilgisi_Hasta" Association="Self.FK_HastalikBilgisi_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="HastalikBilgisi" EntitySet="HastalikBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Hasta" Association="Self.FK_Login_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_Hasta" Association="Self.FK_Randevu_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TahlilBilgisi_Hasta" Association="Self.FK_TahlilBilgisi_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="TahlilBilgisi" EntitySet="TahlilBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastalikBilgisi_Hastalik" Association="Self.FK_HastalikBilgisi_Hastalik">
+            <End Role="Hastalik" EntitySet="Hastalik" />
+            <End Role="HastalikBilgisi" EntitySet="HastalikBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastalikBilgisi_Ilac" Association="Self.FK_HastalikBilgisi_Ilac">
+            <End Role="Ilac" EntitySet="Ilac" />
+            <End Role="HastalikBilgisi" EntitySet="HastalikBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hastane_Il" Association="Self.FK_Hastane_Il">
+            <End Role="Il" EntitySet="Il" />
+            <End Role="Hastane" EntitySet="Hastane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hastane_Ilce" Association="Self.FK_Hastane_Ilce">
+            <End Role="Ilce" EntitySet="Ilce" />
+            <End Role="Hastane" EntitySet="Hastane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneBilgisi_Hastane" Association="Self.FK_HastaneBilgisi_Hastane">
+            <End Role="Hastane" EntitySet="Hastane" />
+            <End Role="HastaneBilgisi" EntitySet="HastaneBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_HastaneBilgisi" Association="Self.FK_Randevu_HastaneBilgisi">
+            <End Role="HastaneBilgisi" EntitySet="HastaneBilgisi" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SaglikDBModelStoreContainer" CdmEntityContainer="SaglikDBEntities">
+          <EntitySetMapping Name="Bolum">
+            <EntityTypeMapping TypeName="SaglikDBModel.Bolum">
+              <MappingFragment StoreEntitySet="Bolum">
+                <ScalarProperty Name="BolumID" ColumnName="BolumID" />
+                <ScalarProperty Name="BolumAd" ColumnName="BolumAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doktor">
+            <EntityTypeMapping TypeName="SaglikDBModel.Doktor">
+              <MappingFragment StoreEntitySet="Doktor">
+                <ScalarProperty Name="DoktorID" ColumnName="DoktorID" />
+                <ScalarProperty Name="DoktorAd" ColumnName="DoktorAd" />
+                <ScalarProperty Name="DoktorSoyad" ColumnName="DoktorSoyad" />
+                <ScalarProperty Name="BolumID" ColumnName="BolumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hasta">
+            <EntityTypeMapping TypeName="SaglikDBModel.Hasta">
+              <MappingFragment StoreEntitySet="Hasta">
+                <ScalarProperty Name="HastaTC" ColumnName="HastaTC" />
+                <ScalarProperty Name="HastaAd" ColumnName="HastaAd" />
+                <ScalarProperty Name="HastaSoyad" ColumnName="HastaSoyad" />
+                <ScalarProperty Name="HastaTel" ColumnName="HastaTel" />
+                <ScalarProperty Name="HastaCinsiyet" ColumnName="HastaCinsiyet" />
+                <ScalarProperty Name="HastaDogumTarihi" ColumnName="HastaDogumTarihi" />
+                <ScalarProperty Name="HastaYas" ColumnName="HastaYas" />
+                <ScalarProperty Name="HastaKanGrubu" ColumnName="HastaKanGrubu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hastalik">
+            <EntityTypeMapping TypeName="SaglikDBModel.Hastalik">
+              <MappingFragment StoreEntitySet="Hastalik">
+                <ScalarProperty Name="HastalikID" ColumnName="HastalikID" />
+                <ScalarProperty Name="HastalikAd" ColumnName="HastalikAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HastalikBilgisi">
+            <EntityTypeMapping TypeName="SaglikDBModel.HastalikBilgisi">
+              <MappingFragment StoreEntitySet="HastalikBilgisi">
+                <ScalarProperty Name="HastaTC" ColumnName="HastaTC" />
+                <ScalarProperty Name="HastalikID" ColumnName="HastalikID" />
+                <ScalarProperty Name="IlacID" ColumnName="IlacID" />
+                <ScalarProperty Name="HastalikTeshisTarihi" ColumnName="HastalikTeshisTarihi" />
+                <ScalarProperty Name="HastalikIyilestigiTarih" ColumnName="HastalikIyilestigiTarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hastane">
+            <EntityTypeMapping TypeName="SaglikDBModel.Hastane">
+              <MappingFragment StoreEntitySet="Hastane">
+                <ScalarProperty Name="HastaneID" ColumnName="HastaneID" />
+                <ScalarProperty Name="HastaneAd" ColumnName="HastaneAd" />
+                <ScalarProperty Name="IlID" ColumnName="IlID" />
+                <ScalarProperty Name="IlceID" ColumnName="IlceID" />
+                <ScalarProperty Name="HastaneAdresi" ColumnName="HastaneAdresi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HastaneBilgisi">
+            <EntityTypeMapping TypeName="SaglikDBModel.HastaneBilgisi">
+              <MappingFragment StoreEntitySet="HastaneBilgisi">
+                <ScalarProperty Name="HastaneBilgisiID" ColumnName="HastaneBilgisiID" />
+                <ScalarProperty Name="HastaneID" ColumnName="HastaneID" />
+                <ScalarProperty Name="DoktorID" ColumnName="DoktorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Il">
+            <EntityTypeMapping TypeName="SaglikDBModel.Il">
+              <MappingFragment StoreEntitySet="Il">
+                <ScalarProperty Name="IlID" ColumnName="IlID" />
+                <ScalarProperty Name="IlAd" ColumnName="IlAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ilac">
+            <EntityTypeMapping TypeName="SaglikDBModel.Ilac">
+              <MappingFragment StoreEntitySet="Ilac">
+                <ScalarProperty Name="IlacID" ColumnName="IlacID" />
+                <ScalarProperty Name="IlacAd" ColumnName="IlacAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ilce">
+            <EntityTypeMapping TypeName="SaglikDBModel.Ilce">
+              <MappingFragment StoreEntitySet="Ilce">
+                <ScalarProperty Name="IlceID" ColumnName="IlceID" />
+                <ScalarProperty Name="IlceAd" ColumnName="IlceAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="SaglikDBModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="HastaTC" ColumnName="HastaTC" />
+                <ScalarProperty Name="HasraPassword" ColumnName="HasraPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Randevu">
+            <EntityTypeMapping TypeName="SaglikDBModel.Randevu">
+              <MappingFragment StoreEntitySet="Randevu">
+                <ScalarProperty Name="HastaTC" ColumnName="HastaTC" />
+                <ScalarProperty Name="HastaneBilgisiID" ColumnName="HastaneBilgisiID" />
+                <ScalarProperty Name="RandevuTarihi" ColumnName="RandevuTarihi" />
+                <ScalarProperty Name="RandevuSaati" ColumnName="RandevuSaati" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SaglikDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TahlilBilgisi">
+            <EntityTypeMapping TypeName="SaglikDBModel.TahlilBilgisi">
+              <MappingFragment StoreEntitySet="TahlilBilgisi">
+                <ScalarProperty Name="HastaTC" ColumnName="HastaTC" />
+                <ScalarProperty Name="TahlilTarihi" ColumnName="TahlilTarihi" />
+                <ScalarProperty Name="Glukoz" ColumnName="Glukoz" />
+                <ScalarProperty Name="Kolestrol" ColumnName="Kolestrol" />
+                <ScalarProperty Name="Hemoglobin" ColumnName="Hemoglobin" />
+                <ScalarProperty Name="KanBasıncı" ColumnName="KanBasıncı" />
+                <ScalarProperty Name="B12" ColumnName="B12" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="Kalsiyum" ColumnName="Kalsiyum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

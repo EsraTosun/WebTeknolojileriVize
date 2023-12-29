@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  saglikwebuygulamasi1:
+    image: saglikwebuygulamasi-image:latest
+    ports:
+      - "80:80"
