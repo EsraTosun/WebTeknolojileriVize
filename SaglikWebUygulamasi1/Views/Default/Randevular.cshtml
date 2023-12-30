@@ -1,0 +1,61 @@
+﻿@model List<SaglikWebUygulamasi1.Models.Randevu>
+
+
+@{
+    ViewBag.Title = "Randevular";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Randevular</h2>
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_content">
+        <div class="container-fluid px-4">
+            <div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        DataTable Example
+                    </div>
+                    <!-- TABLONUN İÇERİĞİ-->
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>Hastane TC</th>
+                                    <th>Hasta Ad</th>
+                                    <th>Hasta Soyad</th>
+                                    <th>Bolum</th>
+                                    <th>Doktor Ad Soyad</th>
+                                    <th>Randevu Tarihi</th>
+                                    <th>Randevu Saati</th>
+                                    <th>Hastane Adı</th>
+                                    <th>Hastane Adresi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.HastaTC</td>
+                                        <td>@item.Hasta.HastaAd</td>
+                                        <td>@item.Hasta.HastaSoyad</td>
+                                        <td>@item.HastaneBilgisi.Doktor.Bolum.BolumAd</td>
+                                        <td>@item.HastaneBilgisi.Doktor.DoktorAd 
+                                            @item.HastaneBilgisi.Doktor.DoktorSoyad 
+                                        </td>
+                                        <td>@item.RandevuTarihi.Date.ToShortDateString()</td>
+                                        <td>@item.RandevuSaati</td>
+                                        <td>@item.HastaneBilgisi.Hastane.HastaneAd</td>
+                                        <td>@item.HastaneBilgisi.Hastane.HastaneAdresi</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

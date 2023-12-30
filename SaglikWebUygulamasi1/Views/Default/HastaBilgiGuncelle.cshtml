@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "HastaBilgiGuncelle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HastaBilgiGuncelle</h2>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Bilgileri</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        #userInfo {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Kullanıcı Bilgileri</h2>
+
+    <form id="userForm">
+        <label for="firstName">Adınız:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="lastName">Soyadınız:</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <button type="button" onclick="displayUserInfo()">Bilgileri Göster</button>
+    </form>
+
+    <div id="userInfo"></div>
+
+</body>
+</html>
+
+

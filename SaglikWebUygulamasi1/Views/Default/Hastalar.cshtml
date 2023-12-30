@@ -1,0 +1,53 @@
+﻿@model List<SaglikWebUygulamasi1.Models.Hasta>
+@{
+    ViewBag.Title = "Hastalar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hastalar</h2>
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_content">
+        <div class="container-fluid px-4">
+            <div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        DataTable Example
+                    </div>
+                    <!-- TABLONUN İÇERİĞİ-->
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>Hasta TC</th>
+                                    <th>Hasta Adı</th>
+                                    <th>Hasta Soyad</th>
+                                    <th>Hasta Doğum Tarihi</th>
+                                    <th>Hasta Kan Grubu</th>
+                                    <th>Hasta Tel</th>
+                                    <th>Hasta Cinsiyet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.HastaTC</td>
+                                        <td>@item.HastaAd</td>
+                                        <td>@item.HastaSoyad</td>
+                                        <td>@item.HastaDogumTarihi.Date.ToShortDateString()</td>
+                                        <td>@item.HastaKanGrubu</td>
+                                        <td>@item.HastaTel</td>
+                                        <td>@item.HastaCinsiyet</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

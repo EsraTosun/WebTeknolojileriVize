@@ -112,7 +112,7 @@
       <PropertyRef Name="HastaTC" />
     </Key>
     <Property Name="HastaTC" Type="Int32" Nullable="false" />
-    <Property Name="HasraPassword" Type="Int32" Nullable="false" />
+    <Property Name="HastaPassword" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Hasta" Relationship="Self.FK_Login_Hasta" FromRole="Login" ToRole="Hasta" />
   </EntityType>
   <EntityType Name="Randevu">

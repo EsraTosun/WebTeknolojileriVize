@@ -92,7 +92,7 @@
       <PropertyRef Name="HastaTC" />
     </Key>
     <Property Name="HastaTC" Type="int" Nullable="false" />
-    <Property Name="HasraPassword" Type="int" Nullable="false" />
+    <Property Name="HastaPassword" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Randevu">
     <Key>

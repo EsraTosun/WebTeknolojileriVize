@@ -100,7 +100,7 @@
       <EntityTypeMapping TypeName="SaglikDBModel.Login">
         <MappingFragment StoreEntitySet="Login">
           <ScalarProperty Name="HastaTC" ColumnName="HastaTC" />
-          <ScalarProperty Name="HasraPassword" ColumnName="HasraPassword" />
+          <ScalarProperty Name="HastaPassword" ColumnName="HastaPassword" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

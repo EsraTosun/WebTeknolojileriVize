@@ -15,7 +15,7 @@ namespace SaglikWebUygulamasi1.Models
     public partial class Login
     {
         public int HastaTC { get; set; }
-        public int HasraPassword { get; set; }
+        public int HastaPassword { get; set; }
     
         public virtual Hasta Hasta { get; set; }
     }

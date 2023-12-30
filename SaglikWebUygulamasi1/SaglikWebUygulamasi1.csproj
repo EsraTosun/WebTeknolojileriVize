@@ -155,6 +155,7 @@
     <Compile Include="Models\Doktor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DuzenleClass.cs" />
     <Compile Include="Models\Hasta.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -206,6 +207,7 @@
     <Compile Include="Models\TahlilBilgisi.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\YeniKayitClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +227,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Default\Login.cshtml" />
+    <Content Include="Views\Default\Hastalar.cshtml" />
+    <Content Include="Views\Default\Randevular.cshtml" />
+    <Content Include="Views\Default\YeniKayit.cshtml" />
+    <Content Include="Views\Default\HastaBilgiGuncelle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
