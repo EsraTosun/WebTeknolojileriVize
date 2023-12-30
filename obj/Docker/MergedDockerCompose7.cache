@@ -1,0 +1,33 @@
+name: dockercompose1625329723077191003
+services:
+  saglikwebuygulamasi1:
+    image: saglikwebuygulamasi-image:latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+  web:
+    command:
+      - dotnet
+      - SaglikWebUygulamasi.dll
+    image: mcr.microsoft.com/dotnet/aspnet:5.0
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /SaglikWebUygulamasi
+        target: /app
+        bind:
+          create_host_path: true
+    working_dir: /app
+networks:
+  default:
+    name: dockercompose1625329723077191003_default

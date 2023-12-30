@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   saglikwebuygulamasi1:
+    platform: windows
     image: saglikwebuygulamasi-image:latest
     ports:
       - "80:80"

@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  saglikwebuygulamasi1:
+    image: saglikwebuygulamasi-image:dev
+    container_name: "SaglikWebUygulamasi1"
+    build:
+      args:
+        BUILD_CONFIGURATION: Debug
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "SaglikWebUygulamasi1"
+    volumes:
+      - C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1:C:\inetpub\wwwroot
+      - C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Remote Debugger:C:\remote_debugger:ro
+    entrypoint: cmd /c "start /B C:\\ServiceMonitor.exe w3svc & C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646"
+    environment:
+      - DEV_ENVIRONMENT=1
+      - VBCSCOMPILER_TTL=604800
+

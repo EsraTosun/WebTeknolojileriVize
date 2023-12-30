@@ -87,3 +87,7 @@ C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamas
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.csproj.CopyComplete
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.pdb
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.dll
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.SqlServer.dll
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.xml
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.SqlServer.xml

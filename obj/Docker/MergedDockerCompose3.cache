@@ -1,0 +1,28 @@
+name: dockercompose1625329723077191003
+services:
+  db:
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Express
+      SA_PASSWORD: yourStrong(!)Password
+    image: mcr.microsoft.com/mssql/server
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+  saglikwebuygulamasi1:
+    image: saglikwebuygulamasi-image:latest
+    networks:
+      default: null
+    platform: windows
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+networks:
+  default:
+    name: dockercompose1625329723077191003_default

@@ -1,11 +1,46 @@
-version: '3.4'
+#version: '3.4'
+
+#services:
+ # db:
+#    image: mcr.microsoft.com/mssql/server
+#    environment:
+#      SA_PASSWORD: "yourStrong(!)Password"
+#      ACCEPT_EULA: "Y"
+#      MSSQL_PID: "Express"
+#    ports:
+#      - "1433:1433"
+
+version: '3.8'
 
 services:
-  db:
-    image: mcr.microsoft.com/mssql/server
-    environment:
-      SA_PASSWORD: "yourStrong(!)Password"
-      ACCEPT_EULA: "Y"
-      MSSQL_PID: "Express"
+  web:
+    depends_on:
+      - db
+    image: mcr.microsoft.com/dotnet/aspnet:5.0
+    networks:
+      default: null
+    platform: windows
     ports:
-      - "1433:1433"
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest-windows
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Express
+      MSSQL_SA_PASSWORD: yourStrong(!)Password
+    networks:
+      default: null
+    platform: windows
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+
+
+ 
+
+

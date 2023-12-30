@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaglikWebUygulamasi1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,11 +11,20 @@ namespace SaglikWebUygulamasi1.Controllers
     {
         // GET: Default
 
+        SaglikDBEntities ent = new SaglikDBEntities();
+
+
         [HttpGet]
         public ActionResult Login()
         {
+            List<Hasta> model = new List<Hasta>();
+
+            model = ent.Hasta.ToList();
+            
+            Console.WriteLine(model.Count);
+            //Console.ReadLine(); // Kullanıcının Enter tuşuna basmasını bekleyerek programın kapatılmasını engelleme
             return View();
-        }
+        }  
 
         [HttpPost]
         [ValidateAntiForgeryToken]
