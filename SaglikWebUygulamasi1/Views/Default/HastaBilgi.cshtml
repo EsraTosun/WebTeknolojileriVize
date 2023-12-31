@@ -1,0 +1,104 @@
+﻿@model SaglikWebUygulamasi1.Models.DuzenleClass
+
+@{
+    ViewBag.Title = "HastaBilgi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HastaBilgi</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benim Bilgilerim</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4285f4;
+        }
+
+        .info {
+            margin-top: 20px;
+        }
+
+            .info p {
+                margin: 10px 0;
+            }
+
+        strong {
+            color: #333;
+        }
+        /* Düğme stilleri */
+        .nav-linkhasta {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff; /* Düğme rengi */
+            color: #fff; /* Yazı rengi */
+            text-decoration: none;
+            border-radius: 5px; /* Kenar yuvarlaklığı */
+        }
+
+        /* İkon stil */
+        .sb-nav-link-iconhasta {
+            margin-right: 10px;
+        }
+
+        /* Düğme üzerine gelindiğinde */
+        .nav-link:hoverhasta {
+            background-color: #0056b3; /* Hover rengi */
+        }
+
+        /* İsteğe bağlı: İkon rengi */
+        .sb-nav-link-iconhasta i {
+            color: #fff; /* İkon rengi */
+        }
+
+        /* İsteğe bağlı: Düğme metin rengi */
+        .button-texthasta {
+            color: #fff; /* Düğme metin rengi */
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Benim Bilgilerim</h1>
+        <div class="info">
+            <p><strong>TC: </strong>@Model.duzenlenecekHastaBilgisi.HastaTC</p>
+            <p><strong>AD: </strong>@Model.duzenlenecekHastaBilgisi.HastaAd </p>
+            <p><strong>SOYAD: </strong>@Model.duzenlenecekHastaBilgisi.HastaSoyad</p>
+            <p><strong>DOĞUM TARİHİ: </strong>@Model.duzenlenecekHastaBilgisi.HastaDogumTarihi.Date.ToShortDateString()</p>
+            <p><strong>KAN GRUBU: </strong>@Model.duzenlenecekHastaBilgisi.HastaKanGrubu</p>
+            <p><strong>TELEFON NUMARASI: </strong>@Model.duzenlenecekHastaBilgisi.HastaTel</p>
+            <p><strong>CİNSİYET: </strong>@Model.duzenlenecekHastaBilgisi.HastaCinsiyet</p>
+        </div>
+        <a class="nav-linkhasta" href="/Default/HastaBilgiGuncelle">
+            <span class="button-text">Güncelle</span>
+        </a>
+    </div>
+</body>
+</html>
+
+

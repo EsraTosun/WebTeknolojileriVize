@@ -231,6 +231,9 @@
     <Content Include="Views\Default\Randevular.cshtml" />
     <Content Include="Views\Default\YeniKayit.cshtml" />
     <Content Include="Views\Default\HastaBilgiGuncelle.cshtml" />
+    <Content Include="Views\Default\HastaBilgi.cshtml" />
+    <Content Include="Views\Default\TahlilBilgisi.cshtml" />
+    <Content Include="Views\Default\SifreGuncelleme.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

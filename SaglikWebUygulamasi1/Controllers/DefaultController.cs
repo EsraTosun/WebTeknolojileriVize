@@ -1,7 +1,9 @@
 ﻿using SaglikWebUygulamasi1.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,6 +15,7 @@ namespace SaglikWebUygulamasi1.Controllers
 
         SaglikDBEntities ent = new SaglikDBEntities();
         static String TC;
+        Hasta hasta = new Hasta();  
         int password;
 
 
@@ -35,6 +38,7 @@ namespace SaglikWebUygulamasi1.Controllers
             if (KullaniciGirisKontrol(inputTC, inputPassword))
             {
                 TC = inputTC;
+                hasta = ent.Hasta.Find(int.Parse(TC)); 
                 password = int.Parse(inputPassword);
                 // Giriş başarılı ise, kullanıcıyı Index action'ına yönlendir.
                 return RedirectToAction("Index", "Home");
@@ -83,6 +87,14 @@ namespace SaglikWebUygulamasi1.Controllers
             return View(model);
         }
 
+        public ActionResult TahlilBilgisi()
+        {
+            List<TahlilBilgisi> model = new List<TahlilBilgisi>();
+
+            model = ent.TahlilBilgisi.Where(a => a.HastaTC.ToString() == TC).ToList();
+            return View(model);
+        }
+
         public ActionResult YeniKayit()
         {
             YeniKayitClass model = new YeniKayitClass();
@@ -117,6 +129,21 @@ namespace SaglikWebUygulamasi1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult HastaBilgi()
+        {
+            DuzenleClass model = new DuzenleClass();
+
+            model.HastaList = ent.Hasta.ToList();
+            model.loginList = ent.Login.ToList();
+
+            //model.duzenlenecekHastaBilgisi = ent.Hasta.Find(int.Parse(TC));
+            model.duzenlenecekHastaBilgisi = ent.Hasta.Find(int.Parse(TC));
+            // DuzenleClass'ı liste içine alın
+            List<DuzenleClass> modelList = new List<DuzenleClass> { model };
+
+            return View(model);
+        }
+
         public ActionResult HastaBilgiGuncelle()
         {
             DuzenleClass model = new DuzenleClass();
@@ -124,27 +151,73 @@ namespace SaglikWebUygulamasi1.Controllers
             model.HastaList = ent.Hasta.ToList();
             model.loginList = ent.Login.ToList();
 
+            //model.duzenlenecekHastaBilgisi = ent.Hasta.Find(int.Parse(TC));
             model.duzenlenecekHastaBilgisi = ent.Hasta.Find(int.Parse(TC));
+            // DuzenleClass'ı liste içine alın
+            List<DuzenleClass> modelList = new List<DuzenleClass> { model };
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult KayitDuzenle(String hastaKanGrubu,DateTime hastaDogumTarihi,int hastaYas,int hastaPassword)
+        public ActionResult HastaBilgiGuncelle(string ad, string soyad, DateTime dogumTarihi, int yas, string kanGrubu, int tel)
         {
+            // Formdan gelen bilgileri model üzerinden alabilirsiniz.
+            // Örneğin, formunuzdaki alanlar model içinde HastaKanGrubu, HastaDogumTarihi, HastaYas, HastaPassword gibi özelliklere karşılık geliyorsa:
+
             Hasta d = new Hasta();
 
-            d = ent.Hasta.Find(int.Parse(TC));
+            try
+            {
+                d = ent.Hasta.Find(int.Parse(TC));
 
-            d.HastaKanGrubu = hastaKanGrubu;
-            d.HastaDogumTarihi = hastaDogumTarihi;
-            d.HastaYas = hastaYas;
-            d.Login.HastaPassword = hastaPassword;
+                d.HastaTC = int.Parse(TC);
+                d.HastaAd = ad;
+                d.HastaSoyad = soyad;
+                d.HastaDogumTarihi = dogumTarihi.Date;
+                d.HastaYas = yas;
+                d.HastaKanGrubu = kanGrubu;
+                d.HastaTel = tel;
+                d.HastaCinsiyet = hasta.HastaCinsiyet;
+
+                // Değişiklikleri kaydetme
+                ent.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var error in validationErrors.ValidationErrors)
+                    {
+                        Console.WriteLine($"Property: {error.PropertyName} Error: {error.ErrorMessage}");
+                    }
+                }
+            }
+            // Güncellenmiş modeli View'e gönder
+            return RedirectToAction("HastaBilgi");
+        }
+
+        public ActionResult SifreGuncelleme()
+        {
+            Login model = new Login();
+            model = ent.Login.Find(int.Parse(TC));
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SifreGuncelleme(int password)
+        {
+            Login d = new Login();
+
+            d = ent.Login.Find(int.Parse(TC));
+
+            d.HastaTC = int.Parse(TC);
+            d.HastaPassword = password;
 
             ent.SaveChanges();
 
-            return RedirectToAction("OgrenciDers");
+            return View();
         }
-
     }
 }

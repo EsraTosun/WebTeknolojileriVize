@@ -1,91 +1,114 @@
-﻿
+﻿@model SaglikWebUygulamasi1.Models.DuzenleClass
+
 @{
     ViewBag.Title = "HastaBilgiGuncelle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>HastaBilgiGuncelle</h2>
 
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kullanıcı Bilgileri</title>
+    <title>Benim Bilgilerim</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
             color: #333;
-            text-align: center;
-            margin: 50px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        h2 {
-            color: #007bff;
-        }
-
-        form {
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 20px;
+        #container {
             background-color: #fff;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            text-align: left;
-            margin: 10px 0;
-        }
-
-        input {
+            max-width: 400px;
             width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            text-align: center;
         }
 
-        button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        h1 {
+            color: #4285f4;
         }
 
-            button:hover {
-                background-color: #0056b3;
+        .info {
+            margin-top: 20px;
+        }
+
+            .info p {
+                margin: 10px 0;
             }
 
-        #userInfo {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        strong {
+            color: #333;
         }
     </style>
 </head>
 <body>
+    <div id="container">
+        <h1>Benim Bilgilerim</h1>
+        <form action="@Url.Action("HastaBilgiGuncelle", "Default")" method="post">
+            @Html.AntiForgeryToken()
 
-    <h2>Kullanıcı Bilgileri</h2>
+            <p><strong>TC: </strong>@Model.duzenlenecekHastaBilgisi.HastaTC</p>
+            <div class="form-floating mb-3" onclick="toggleInput('ad')">
+                <strong>AD: </strong>
+                <span id="adSpan">@Model.duzenlenecekHastaBilgisi.HastaAd</span>
+                <input type="text" class="form-control" id="adInput" name="ad" value="@Model.duzenlenecekHastaBilgisi.HastaAd" style="display:none;" />
+            </div>
+            <div class="form-floating mb-3" onclick="toggleInput('soyad')">
+                <strong>SOYAD: </strong>
+                <span id="soyadSpan">@Model.duzenlenecekHastaBilgisi.HastaSoyad</span>
+                <input type="text" class="form-control" id="soyadInput" name="soyad" value="@Model.duzenlenecekHastaBilgisi.HastaSoyad" style="display:none;" />
+            </div>
+            <div class="form-floating mb-3" onclick="toggleInput('dogumTarihi')">
+                <strong>DOĞUM TARİHİ: </strong>
+                <span id="dogumTarihiSpan">@Model.duzenlenecekHastaBilgisi.HastaDogumTarihi</span>
+                <input type="text" class="form-control" id="dogumTarihiInput" name="dogumTarihi" value="@Model.duzenlenecekHastaBilgisi.HastaDogumTarihi" style="display:none;" />
+            </div>
+            <div class="form-floating mb-3" onclick="toggleInput('yas')">
+                <strong>YAŞ: </strong>
+                <span id="yasSpan">@Model.duzenlenecekHastaBilgisi.HastaYas</span>
+                <input type="text" class="form-control" id="yasInput" name="yas" value="@Model.duzenlenecekHastaBilgisi.HastaYas" style="display:none;" />
+            </div>
+            <div class="form-floating mb-3" onclick="toggleInput('kanGrubu')">
+                <strong>KAN GRUBU: </strong>
+                <span id="kanGrubuSpan">@Model.duzenlenecekHastaBilgisi.HastaKanGrubu</span>
+                <input type="text" class="form-control" id="kanGrubuInput" name="kanGrubu" value="@Model.duzenlenecekHastaBilgisi.HastaKanGrubu" style="display:none;" />
+            </div>
+            <div class="form-floating mb-3" onclick="toggleInput('tel')">
+                <strong>TELEFON NUMARASI: </strong>
+                <span id="telSpan">@Model.duzenlenecekHastaBilgisi.HastaTel</span>
+                <input type="text" class="form-control" id="telInput" name="tel" value="@Model.duzenlenecekHastaBilgisi.HastaTel" style="display:none;" />
+            </div>
+            <p><strong>CİNSİYET: </strong>@Model.duzenlenecekHastaBilgisi.HastaCinsiyet</p>
+            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                <input class="btn btn-primary" type="submit" value="Kaydet">
+            </div>
+        </form>
+    </div>
+    <script>
+        function toggleInput(fieldName) {
+            var spanElement = document.getElementById(fieldName + "Span");
+            var inputElement = document.getElementById(fieldName + "Input");
 
-    <form id="userForm">
-        <label for="firstName">Adınız:</label>
-        <input type="text" id="firstName" name="firstName" required>
-
-        <label for="lastName">Soyadınız:</label>
-        <input type="text" id="lastName" name="lastName" required>
-
-        <button type="button" onclick="displayUserInfo()">Bilgileri Göster</button>
-    </form>
-
-    <div id="userInfo"></div>
+            if (spanElement.style.display !== "none") {
+                spanElement.style.display = "none";
+                inputElement.style.display = "inline";
+                inputElement.focus();
+            } else {
+                spanElement.style.display = "inline";
+                inputElement.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>

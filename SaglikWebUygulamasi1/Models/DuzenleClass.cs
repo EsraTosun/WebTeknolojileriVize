@@ -8,7 +8,7 @@ namespace SaglikWebUygulamasi1.Models
     public class DuzenleClass
     {
         public Hasta duzenlenecekHastaBilgisi { get; set; }
-        public Hasta duzenlenecekLoginBilgisi { get; set; }
+        public Login duzenlenecekLoginBilgisi { get; set; }
 
 
         public List<Login> loginList { get; set; }
