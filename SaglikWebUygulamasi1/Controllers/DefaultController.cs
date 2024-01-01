@@ -1,9 +1,13 @@
-﻿using SaglikWebUygulamasi1.Models;
+﻿using Newtonsoft.Json;
+using SaglikWebUygulamasi1.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Cryptography;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -28,17 +32,19 @@ namespace SaglikWebUygulamasi1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string inputTC, string inputPassword)
+        public async Task<ActionResult> Login(string inputTC, string inputPassword)
         {
             TC = inputTC;
-            // Kullanıcı adı ve şifre kontrolü yapılacak
-            // Eğer giriş başarılıysa, kullanıcıyı ana sayfaya yönlendirilebilir
-            // Eğer giriş başarısızsa, hata mesajı eklenerek tekrar giriş sayfasına yönlendirilebilir
+
             // Kullanıcı giriş kontrolü burada yapılır.
-            if (KullaniciGirisKontrol(inputTC, inputPassword))
+            //bool result = await KullaniciGirisKontrol(inputTC, inputPassword);
+            bool result = KullaniciGirisKontrol(inputTC, inputPassword);
+
+
+            if (result)
             {
                 TC = inputTC;
-                hasta = ent.Hasta.Find(int.Parse(TC)); 
+                hasta = ent.Hasta.Find(int.Parse(TC));
                 password = int.Parse(inputPassword);
                 // Giriş başarılı ise, kullanıcıyı Index action'ına yönlendir.
                 return RedirectToAction("Index", "Home");
@@ -70,6 +76,46 @@ namespace SaglikWebUygulamasi1.Controllers
             // Giriş kontrolü işlemleri burada gerçekleştirilir.
             return false; // Örnek olarak her zaman başarılı dönüş yapalım.
         }
+
+        private async Task<bool> KullaniciGirisKontrol1(string username, string password)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var response = await httpClient.GetAsync("https://localhost:44384/api/Loginapi/GetKayitliKullanicilar");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine("Content: " + content);
+
+                    List<Login> modelList = new List<Login>();
+
+                    try
+                    {
+                        // Doğrudan bir dizi olarak deserializasyon yap
+                        modelList = JsonConvert.DeserializeObject<List<Login>>(content);
+
+                        foreach (var item in modelList)
+                        {
+                            if (item.HastaTC.ToString() == username && item.HastaPassword.ToString() == password)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Hata: " + ex.Message);
+                        // Hata ayrıntılarını yazdır
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+
 
         public ActionResult Hastalar()
         {

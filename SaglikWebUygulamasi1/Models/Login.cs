@@ -16,7 +16,5 @@ namespace SaglikWebUygulamasi1.Models
     {
         public int HastaTC { get; set; }
         public int HastaPassword { get; set; }
-    
-        public virtual Hasta Hasta { get; set; }
     }
 }

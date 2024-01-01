@@ -1,3 +1,5 @@
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.csproj.AssemblyReference.cache
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.csproj.CoreCompileInputs.cache
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\SaglikWebUygulamasi1.dll.config
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\SaglikWebUygulamasi1.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\SaglikWebUygulamasi1.pdb
@@ -50,9 +52,13 @@ C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamas
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\roslyn\vbc.rsp
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\roslyn\VBCSCompiler.exe
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.dll
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.SqlServer.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\Microsoft.Owin.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\Newtonsoft.Json.dll
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\Owin.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Net.Http.Formatting.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Web.Helpers.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Web.Http.dll
@@ -62,6 +68,9 @@ C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamas
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Web.Webpages.Deployment.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Web.Webpages.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Web.Webpages.Razor.dll
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.xml
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.SqlServer.xml
+C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\Microsoft.Owin.xml
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Web.Razor.xml
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Web.Webpages.xml
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\System.Web.Webpages.Deployment.xml
@@ -82,12 +91,6 @@ C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamas
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\tr\System.Net.Http.Formatting.resources.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\tr\System.Web.Http.resources.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\tr\System.Web.Http.WebHost.resources.dll
-C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.csproj.AssemblyReference.cache
-C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.csproj.CoreCompileInputs.cache
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.csproj.CopyComplete
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.dll
 C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\obj\Debug\SaglikWebUygulamasi1.pdb
-C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.dll
-C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.SqlServer.dll
-C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.xml
-C:\Users\esrat\Dersler\GuzDonemi\WebTeknolojileri\Vize\Proje1\SaglikWebUygulamasi1\SaglikWebUygulamasi1\bin\EntityFramework.SqlServer.xml
