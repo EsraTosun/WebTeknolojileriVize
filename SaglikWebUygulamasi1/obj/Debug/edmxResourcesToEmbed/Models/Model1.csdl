@@ -32,6 +32,7 @@
     <Property Name="HastaYas" Type="Int32" Nullable="false" />
     <Property Name="HastaKanGrubu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="HastalikBilgisi" Relationship="Self.FK_HastalikBilgisi_Hasta" FromRole="Hasta" ToRole="HastalikBilgisi" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Login_Hasta" FromRole="Hasta" ToRole="Login" />
     <NavigationProperty Name="Randevu" Relationship="Self.FK_Randevu_Hasta" FromRole="Hasta" ToRole="Randevu" />
     <NavigationProperty Name="TahlilBilgisi" Relationship="Self.FK_TahlilBilgisi_Hasta" FromRole="Hasta" ToRole="TahlilBilgisi" />
   </EntityType>
@@ -112,6 +113,7 @@
     </Key>
     <Property Name="HastaTC" Type="Int32" Nullable="false" />
     <Property Name="HastaPassword" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Hasta" Relationship="Self.FK_Login_Hasta" FromRole="Login" ToRole="Hasta" />
   </EntityType>
   <EntityType Name="Randevu">
     <Key>
@@ -183,6 +185,18 @@
         <PropertyRef Name="HastaTC" />
       </Principal>
       <Dependent Role="HastalikBilgisi">
+        <PropertyRef Name="HastaTC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_Hasta">
+    <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+    <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Hasta">
+        <PropertyRef Name="HastaTC" />
+      </Principal>
+      <Dependent Role="Login">
         <PropertyRef Name="HastaTC" />
       </Dependent>
     </ReferentialConstraint>
@@ -309,6 +323,10 @@
     <AssociationSet Name="FK_HastalikBilgisi_Hasta" Association="Self.FK_HastalikBilgisi_Hasta">
       <End Role="Hasta" EntitySet="Hasta" />
       <End Role="HastalikBilgisi" EntitySet="HastalikBilgisi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_Hasta" Association="Self.FK_Login_Hasta">
+      <End Role="Hasta" EntitySet="Hasta" />
+      <End Role="Login" EntitySet="Login" />
     </AssociationSet>
     <AssociationSet Name="FK_Randevu_Hasta" Association="Self.FK_Randevu_Hasta">
       <End Role="Hasta" EntitySet="Hasta" />

@@ -225,6 +225,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Login_Hasta">
+    <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+    <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Hasta">
+        <PropertyRef Name="HastaTC" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="HastaTC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Randevu_Hasta">
     <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
     <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
@@ -307,6 +319,10 @@
     <AssociationSet Name="FK_HastaneBilgisi_Hastane" Association="Self.FK_HastaneBilgisi_Hastane">
       <End Role="Hastane" EntitySet="Hastane" />
       <End Role="HastaneBilgisi" EntitySet="HastaneBilgisi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_Hasta" Association="Self.FK_Login_Hasta">
+      <End Role="Hasta" EntitySet="Hasta" />
+      <End Role="Login" EntitySet="Login" />
     </AssociationSet>
     <AssociationSet Name="FK_Randevu_Hasta" Association="Self.FK_Randevu_Hasta">
       <End Role="Hasta" EntitySet="Hasta" />

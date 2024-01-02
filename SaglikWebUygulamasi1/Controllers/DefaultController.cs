@@ -13,6 +13,12 @@ using System.Web.Mvc;
 
 namespace SaglikWebUygulamasi1.Controllers
 {
+    public class LoginCredentials
+    {
+        public int HastaTC { get; set; }
+        public int HastaPassword { get; set; }
+    }
+
     public class DefaultController : Controller
     {
         // GET: Default
@@ -38,7 +44,7 @@ namespace SaglikWebUygulamasi1.Controllers
 
             // Kullanıcı giriş kontrolü burada yapılır.
             //bool result = await KullaniciGirisKontrol(inputTC, inputPassword);
-            bool result = KullaniciGirisKontrol(inputTC, inputPassword);
+            bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
 
 
             if (result)
@@ -88,12 +94,12 @@ namespace SaglikWebUygulamasi1.Controllers
                     var content = await response.Content.ReadAsStringAsync();
                     System.Diagnostics.Debug.WriteLine("Content: " + content);
 
-                    List<Login> modelList = new List<Login>();
+                    List<LoginCredentials> modelList = new List<LoginCredentials>();
 
                     try
                     {
                         // Doğrudan bir dizi olarak deserializasyon yap
-                        modelList = JsonConvert.DeserializeObject<List<Login>>(content);
+                        modelList = JsonConvert.DeserializeObject<List<LoginCredentials>>(content);
 
                         foreach (var item in modelList)
                         {
@@ -105,6 +111,7 @@ namespace SaglikWebUygulamasi1.Controllers
                     }
                     catch (Exception ex)
                     {
+                        System.Diagnostics.Debug.WriteLine("Hata: " + ex.ToString());
                         System.Diagnostics.Debug.WriteLine("Hata: " + ex.Message);
                         // Hata ayrıntılarını yazdır
                     }

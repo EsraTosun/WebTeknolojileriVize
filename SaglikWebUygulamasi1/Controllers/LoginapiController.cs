@@ -48,7 +48,9 @@ namespace SaglikWebUygulamasi1.Controllers
             var jsonSettings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                // Diğer yapılandırma seçenekleri
+                Formatting = Formatting.Indented,  // Güzel bir görünüm için
+                NullValueHandling = NullValueHandling.Ignore,  // Null değerleri göz ardı et
+                                                               // Başka yapılandırma seçenekleri
             };
 
             var json = JsonConvert.SerializeObject(loginInfoList, Formatting.Indented, jsonSettings);
