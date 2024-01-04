@@ -1,6 +1,6 @@
-﻿@model List<SaglikWebUygulamasi1.Models.Hasta>
+﻿@model List<SaglikWebUygulamasi1.Models.Hastane>
 @{
-    ViewBag.Title = "Hastalar";
+    ViewBag.Title = "Hastaneler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,26 +20,20 @@
                         <table id="datatablesSimple">
                             <thead>
                                 <tr>
-                                    <th>Hasta TC</th>
-                                    <th>Hasta Adı</th>
-                                    <th>Hasta Soyad</th>
-                                    <th>Hasta Doğum Tarihi</th>
-                                    <th>Hasta Kan Grubu</th>
-                                    <th>Hasta Tel</th>
-                                    <th>Hasta Cinsiyet</th>
+                                    <th>Hastane Ad</th>
+                                    <th>Il Ad</th>
+                                    <th>Ilce Ad</th>
+                                    <th>Hastane Adresi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@item.HastaTC</td>
-                                        <td>@item.HastaAd</td>
-                                        <td>@item.HastaSoyad</td>
-                                        <td>@item.HastaDogumTarihi.Date.ToShortDateString()</td>
-                                        <td>@item.HastaKanGrubu</td>
-                                        <td>@item.HastaTel</td>
-                                        <td>@item.HastaCinsiyet</td>
+                                        <td>@item.HastaneAd</td>
+                                        <td>@item.Il.IlAd</td>
+                                        <td>@item.Ilce.IlceAd</td>
+                                        <td>@item.HastaneAdresi</td>
                                     </tr>
                                 }
                             </tbody>

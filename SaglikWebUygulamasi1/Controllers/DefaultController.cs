@@ -32,7 +32,10 @@ namespace SaglikWebUygulamasi1.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-
+            if(TC != null)
+            {
+                TC = null;
+            }
             return View();
         }
 
@@ -43,8 +46,8 @@ namespace SaglikWebUygulamasi1.Controllers
             TC = inputTC;
 
             // Kullanıcı giriş kontrolü burada yapılır.
-            //bool result = await KullaniciGirisKontrol(inputTC, inputPassword);
-            bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
+            bool result = KullaniciGirisKontrol(inputTC, inputPassword);
+            //bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
 
 
             if (result)
@@ -121,14 +124,66 @@ namespace SaglikWebUygulamasi1.Controllers
             return false;
         }
 
-
-
-
-        public ActionResult Hastalar()
+        [HttpGet]
+        public ActionResult SifremiUnuttum()
         {
-            List<Hasta> model = new List<Hasta>();
 
-            model = ent.Hasta.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SifremiUnuttum(string inputTC,DateTime inputDogumTarihi, int inputPassword)
+        {
+            TC = inputTC;
+
+            // Kullanıcı giriş kontrolü burada yapılır.
+            bool result = KullaniciSifreUnuttum(inputTC,inputDogumTarihi, inputPassword);
+            //bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
+
+
+            if (result)
+            {
+                TC = inputTC;
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Giriş başarısız ise, kullanıcıyı Login sayfasında tut.
+                return View();
+            }
+        }
+
+        private bool KullaniciSifreUnuttum(string username,DateTime dogumTarihi, int password)
+        {
+            List<Login> model = new List<Login>();
+            model = ent.Login.ToList();
+
+            foreach (var item in model)
+            {
+                if (@item.HastaTC.ToString() == username && @item.Hasta.HastaDogumTarihi.Date == dogumTarihi.Date)
+                {
+                    Login d = new Login();
+
+                    d = ent.Login.Find(int.Parse(TC));
+
+                    d.HastaTC = int.Parse(TC);
+                    d.HastaPassword = password;
+
+                    ent.SaveChanges();
+                    return true;
+                }
+            }
+           
+            return false; // Örnek olarak her zaman başarılı dönüş yapalım.
+        }
+
+        public ActionResult Hastaneler()
+        {
+            List<Hastane> model = new List<Hastane>();
+
+            model = ent.Hastane.ToList();
             return View(model);
         }
 
@@ -145,6 +200,14 @@ namespace SaglikWebUygulamasi1.Controllers
             List<TahlilBilgisi> model = new List<TahlilBilgisi>();
 
             model = ent.TahlilBilgisi.Where(a => a.HastaTC.ToString() == TC).ToList();
+            return View(model);
+        }
+
+        public ActionResult HastalikBilgisi()
+        {
+            List<HastalikBilgisi> model = new List<HastalikBilgisi>();
+
+            model = ent.HastalikBilgisi.Where(a => a.HastaTC.ToString() == TC).ToList();
             return View(model);
         }
 
@@ -227,11 +290,11 @@ namespace SaglikWebUygulamasi1.Controllers
                 d.HastaTC = int.Parse(TC);
                 d.HastaAd = ad;
                 d.HastaSoyad = soyad;
-                d.HastaDogumTarihi = dogumTarihi.Date;
+                d.HastaDogumTarihi = dogumTarihi;
                 d.HastaYas = yas;
                 d.HastaKanGrubu = kanGrubu;
                 d.HastaTel = tel;
-                d.HastaCinsiyet = hasta.HastaCinsiyet;
+                d.HastaCinsiyet = d.HastaCinsiyet;
 
                 // Değişiklikleri kaydetme
                 ent.SaveChanges();
@@ -270,7 +333,7 @@ namespace SaglikWebUygulamasi1.Controllers
 
             ent.SaveChanges();
 
-            return View();
+            return View(d);
         }
     }
 }
