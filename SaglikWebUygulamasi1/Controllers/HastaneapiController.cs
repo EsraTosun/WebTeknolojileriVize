@@ -9,41 +9,38 @@ using System.Web.Http;
 
 namespace SaglikWebUygulamasi1.Controllers
 {
-    [RoutePrefix("api/Loginapi")]
-    public class LoginapiController : ApiController
+    public class HastaneapiController : ApiController
     {
         SaglikDBEntities ent = new SaglikDBEntities();
+        String GelenTC;
 
         [HttpGet]   //Veri çeker
-        [Route("GetKayitliKullanicilar")]
-        public IHttpActionResult GetKayitliKullanicilar() 
+        [Route("GetHastane")]
+        public IHttpActionResult GetHastane()
         {
-            List<Login> model = new List<Login>();
-            model = ent.Login.ToList();
+            List<Hastane> model = new List<Hastane>();
+            //model = ent.Hasta.ToList();
+            model = ent.Hastane.ToList();
+
 
             return GetSomeData(model);
         }
 
-        [HttpPost]   //Veri gönderir
-        public void PostKullaniciEkle(Login model)
-        {
-            if(ModelState.IsValid) 
-            {
-                ent.Login.Add(model);
-                ent.SaveChanges();
-            }
-        }
-        
 
         [HttpGet]   //Veri çeker
         [Route("GetSomeData")]
-        public IHttpActionResult GetSomeData(List<Login> model)
+        public IHttpActionResult GetSomeData(List<Hastane> model)
         {
-            var loginInfoList = model.Select(login => new Login
+            var tahlilBilgisiInfoList = model.Select(hastane => new Hastane
             {
-                HastaTC = login.HastaTC,
-                HastaPassword = login.HastaPassword,
-                Hasta = login.Hasta,
+                HastaneAd = hastane.HastaneAd,
+                HastaneAdresi = hastane.HastaneAdresi,
+                HastaneBilgisi = hastane.HastaneBilgisi,
+                HastaneID = hastane.HastaneID,
+                Il = hastane.Il,
+                Ilce = hastane.Ilce,
+                IlceID = hastane.IlceID,
+                IlID = hastane.IlID 
             }).ToList();
 
             var jsonSettings = new JsonSerializerSettings
@@ -54,7 +51,7 @@ namespace SaglikWebUygulamasi1.Controllers
                                                                // Başka yapılandırma seçenekleri
             };
 
-            var json = JsonConvert.SerializeObject(loginInfoList, Formatting.Indented, jsonSettings);
+            var json = JsonConvert.SerializeObject(tahlilBilgisiInfoList, Formatting.Indented, jsonSettings);
 
             return Json(json);
         }

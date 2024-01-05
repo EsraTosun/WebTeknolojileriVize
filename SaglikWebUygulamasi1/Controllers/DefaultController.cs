@@ -46,8 +46,8 @@ namespace SaglikWebUygulamasi1.Controllers
             TC = inputTC;
 
             // Kullanıcı giriş kontrolü burada yapılır.
-            bool result = KullaniciGirisKontrol(inputTC, inputPassword);
-            //bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
+            //bool result = KullaniciGirisKontrol(inputTC, inputPassword);
+            bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
 
 
             if (result)
@@ -97,12 +97,12 @@ namespace SaglikWebUygulamasi1.Controllers
                     var content = await response.Content.ReadAsStringAsync();
                     System.Diagnostics.Debug.WriteLine("Content: " + content);
 
-                    List<LoginCredentials> modelList = new List<LoginCredentials>();
+                    List<Login> modelList = new List<Login>();
 
                     try
                     {
                         // Doğrudan bir dizi olarak deserializasyon yap
-                        modelList = JsonConvert.DeserializeObject<List<LoginCredentials>>(content);
+                        modelList = JsonConvert.DeserializeObject<List<Login>>(content);
 
                         foreach (var item in modelList)
                         {
