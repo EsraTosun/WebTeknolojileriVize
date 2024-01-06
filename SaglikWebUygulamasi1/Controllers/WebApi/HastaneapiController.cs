@@ -9,42 +9,40 @@ using System.Web.Http;
 
 namespace SaglikWebUygulamasi1.Controllers
 {
-    public class TahilibilgisiapiController : ApiController
-    {
+    [RoutePrefix("api/WebApi/Hastaneapi")]
 
+    public class HastaneapiController : ApiController
+    {
         SaglikDBEntities ent = new SaglikDBEntities();
         String GelenTC;
 
         [HttpGet]   //Veri çeker
-        [Route("GetTahlilBilgisi")]
-        public IHttpActionResult GetTahlilBilgisi(String TC)
+        [Route("GetHastane")]
+        public IHttpActionResult GetHastane()
         {
-            List<TahlilBilgisi> model = new List<TahlilBilgisi>();
+            List<Hastane> model = new List<Hastane>();
             //model = ent.Hasta.ToList();
-            GelenTC = TC;
-            model = ent.TahlilBilgisi.Where(a => a.HastaTC.ToString() == TC).ToList();
+            model = ent.Hastane.ToList();
 
 
             return GetSomeData(model);
         }
 
 
-        [HttpGet]   //Veri çeker
+        //[HttpGet]   //Veri çeker
         [Route("GetSomeData")]
-        public IHttpActionResult GetSomeData(List<TahlilBilgisi> model)
+        public IHttpActionResult GetSomeData(List<Hastane> model)
         {
-            var tahlilBilgisiInfoList = model.Select(tahlilBilgisi => new TahlilBilgisi
+            var tahlilBilgisiInfoList = model.Select(hastane => new Hastane
             {
-                HastaTC = tahlilBilgisi.HastaTC,
-                A = tahlilBilgisi.A,
-                TahlilTarihi = tahlilBilgisi.TahlilTarihi,
-                B12 = tahlilBilgisi.B12,
-                Glukoz = tahlilBilgisi.Glukoz,
-                Hemoglobin = tahlilBilgisi.Hemoglobin,
-                Kalsiyum = tahlilBilgisi.Kalsiyum,
-                KanBasıncı = tahlilBilgisi.KanBasıncı,
-                Kolestrol = tahlilBilgisi.Kolestrol,
-                Hasta = tahlilBilgisi .Hasta,
+                HastaneAd = hastane.HastaneAd,
+                HastaneAdresi = hastane.HastaneAdresi,
+                HastaneBilgisi = hastane.HastaneBilgisi,
+                HastaneID = hastane.HastaneID,
+                Il = hastane.Il,
+                Ilce = hastane.Ilce,
+                IlceID = hastane.IlceID,
+                IlID = hastane.IlID 
             }).ToList();
 
             var jsonSettings = new JsonSerializerSettings

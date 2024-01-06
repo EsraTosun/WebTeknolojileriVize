@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace SaglikWebUygulamasi1.Controllers
 {
+    [RoutePrefix("api/WebApi/Hastabilgileriapi")]
     public class HastabilgileriapiController : ApiController
     {
         SaglikDBEntities ent = new SaglikDBEntities();

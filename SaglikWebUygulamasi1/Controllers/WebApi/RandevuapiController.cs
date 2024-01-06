@@ -9,41 +9,38 @@ using System.Web.Http;
 
 namespace SaglikWebUygulamasi1.Controllers
 {
-    [RoutePrefix("api/Loginapi")]
-    public class LoginapiController : ApiController
+    [RoutePrefix("api/WebApi/Randevuapi")]
+    public class RandevuapiController : ApiController
     {
         SaglikDBEntities ent = new SaglikDBEntities();
+        String GelenTC;
 
         [HttpGet]   //Veri çeker
-        [Route("GetKayitliKullanicilar")]
-        public IHttpActionResult GetKayitliKullanicilar() 
+        [Route("GetTRandevu")]
+        public IHttpActionResult GetTRandevu(String TC)
         {
-            List<Login> model = new List<Login>();
-            model = ent.Login.ToList();
+            List<Randevu> model = new List<Randevu>();
+            //model = ent.Hasta.ToList();
+            GelenTC = TC;
+            model = ent.Randevu.Where(a => a.HastaTC.ToString() == TC).ToList();
+
 
             return GetSomeData(model);
         }
 
-        [HttpPost]   //Veri gönderir
-        public void PostKullaniciEkle(Login model)
-        {
-            if(ModelState.IsValid) 
-            {
-                ent.Login.Add(model);
-                ent.SaveChanges();
-            }
-        }
-        
 
         [HttpGet]   //Veri çeker
         [Route("GetSomeData")]
-        public IHttpActionResult GetSomeData(List<Login> model)
+        public IHttpActionResult GetSomeData(List<Randevu> model)
         {
-            var loginInfoList = model.Select(login => new Login
+            var randevuInfoList = model.Select(randevu => new Randevu
             {
-                HastaTC = login.HastaTC,
-                HastaPassword = login.HastaPassword,
-                Hasta = login.Hasta,
+                HastaTC = randevu.HastaTC,
+                HastaneBilgisi = randevu.HastaneBilgisi,
+                Hasta = randevu.Hasta,
+                RandevuSaati = randevu.RandevuSaati,
+                RandevuTarihi = randevu.RandevuTarihi,
+                HastaneBilgisiID = randevu.HastaneBilgisiID, 
             }).ToList();
 
             var jsonSettings = new JsonSerializerSettings
@@ -54,7 +51,7 @@ namespace SaglikWebUygulamasi1.Controllers
                                                                // Başka yapılandırma seçenekleri
             };
 
-            var json = JsonConvert.SerializeObject(loginInfoList, Formatting.Indented, jsonSettings);
+            var json = JsonConvert.SerializeObject(randevuInfoList, Formatting.Indented, jsonSettings);
 
             return Json(json);
         }

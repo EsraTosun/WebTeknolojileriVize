@@ -16,7 +16,7 @@ namespace SaglikWebUygulamasi1
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{folder}/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

@@ -152,13 +152,13 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Controllers\HastabilgileriapiController.cs" />
-    <Compile Include="Controllers\HastalikbilgileriapiController.cs" />
-    <Compile Include="Controllers\HastaneapiController.cs" />
+    <Compile Include="Controllers\WebApi\HastabilgileriapiController.cs" />
+    <Compile Include="Controllers\WebApi\HastalikbilgileriapiController.cs" />
+    <Compile Include="Controllers\WebApi\HastaneapiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginapiController.cs" />
-    <Compile Include="Controllers\RandevuapiController.cs" />
-    <Compile Include="Controllers\TahilibilgisiapiController.cs" />
+    <Compile Include="Controllers\WebApi\LoginapiController.cs" />
+    <Compile Include="Controllers\WebApi\RandevuapiController.cs" />
+    <Compile Include="Controllers\WebApi\TahilibilgisiapiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

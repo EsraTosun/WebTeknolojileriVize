@@ -18,7 +18,7 @@ namespace SaglikWebUygulamasi1.Models
         public int HastaTC { get; set; }
         public int HastaPassword { get; set; }
 
-        [JsonIgnore] // Bu özellik JSON dönüþümünde göz ardý edilecek
+        //[JsonIgnore] // Bu özellik JSON dönüþümünde göz ardý edilecek
         public virtual Hasta Hasta { get; set; }
     }
 }

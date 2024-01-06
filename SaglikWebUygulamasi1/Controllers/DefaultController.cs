@@ -46,8 +46,8 @@ namespace SaglikWebUygulamasi1.Controllers
             TC = inputTC;
 
             // Kullanıcı giriş kontrolü burada yapılır.
-            //bool result = KullaniciGirisKontrol(inputTC, inputPassword);
-            bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
+            bool result = KullaniciGirisKontrol(inputTC, inputPassword);
+            //bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
 
 
             if (result)
@@ -77,8 +77,6 @@ namespace SaglikWebUygulamasi1.Controllers
                     return true;
                 }
             }
-
-
 
             // Kullanıcı giriş kontrolü gerçekleştirilir.
             // Bu metot, kullanıcı girişi başarılı ise true, aksi halde false dönmelidir.
@@ -112,7 +110,7 @@ namespace SaglikWebUygulamasi1.Controllers
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (JsonException ex)
                     {
                         System.Diagnostics.Debug.WriteLine("Hata: " + ex.ToString());
                         System.Diagnostics.Debug.WriteLine("Hata: " + ex.Message);
@@ -179,12 +177,38 @@ namespace SaglikWebUygulamasi1.Controllers
             return false; // Örnek olarak her zaman başarılı dönüş yapalım.
         }
 
-        public ActionResult Hastaneler()
+        public async Task<ActionResult> Hastaneler()
         {
             List<Hastane> model = new List<Hastane>();
 
+            //model = await HastaneGet();
             model = ent.Hastane.ToList();
             return View(model);
+        }
+
+        public async Task<List<Hastane>> HastaneGet()
+        {
+            List<Hastane> modelList = new List<Hastane>();
+
+            using (var httpClient = new HttpClient())
+            {
+                //List<Hastane> model = new List<Hastane>();
+                var response = await httpClient.GetAsync("https://localhost:44384/api/Hastaneapi/GetHastane");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine("Content: " + content);
+
+                    //List<Hastane> modelList = new List<Hastane>();
+
+                    // Doğrudan bir dizi olarak deserializasyon yap
+                    modelList = JsonConvert.DeserializeObject<List<Hastane>>(content);
+                }
+            }
+
+            //model = ent.Hastane.ToList();
+            return modelList;
         }
 
         public ActionResult Randevular()
