@@ -39,24 +39,34 @@ namespace SaglikWebUygulamasi1.Controllers
         [Route("GetSomeData")]
         public IHttpActionResult GetSomeData(List<Login> model)
         {
+            // Gelen Login listesini kullanarak yeni bir liste oluşturuyoruz.
+            // Bu yeni liste, her bir Login nesnesinin sadece belirli özelliklerini içeriyor.
             var loginInfoList = model.Select(login => new Login
             {
                 HastaTC = login.HastaTC,
                 HastaPassword = login.HastaPassword,
-                Hasta = login.Hasta,
+                Hasta = null,
             }).ToList();
 
+            // JSON serileştirme ayarlarını yapılandırıyoruz.
+            // Bu ayarlar, dönen JSON'un görüntüsünü düzenlemek ve belirli durumları ele almak için kullanılır.
             var jsonSettings = new JsonSerializerSettings
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                Formatting = Formatting.Indented,  // Güzel bir görünüm için
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,  // Döngüsel referansları ele alır
+                Formatting = Formatting.Indented,  // JSON'un okunabilir olması için girinti ekler
                 NullValueHandling = NullValueHandling.Ignore,  // Null değerleri göz ardı et
-                                                               // Başka yapılandırma seçenekleri
+                                                               // Diğer yapılandırma seçenekleri
             };
 
-            var json = JsonConvert.SerializeObject(loginInfoList, Formatting.Indented, jsonSettings);
+            // JSON serileştirmeyi gerçekleştiriyoruz.
+            // loginInfoList nesnesini JSON formatına çeviriyoruz.
+            var json = JsonConvert.SerializeObject(loginInfoList, jsonSettings);
 
-            return Json(json);
+            // JSON içeriğini içeren bir HttpResponseMessage döndürüyoruz.
+            // Bu, Web API'nin istemcilere JSON formatında veri göndermesini sağlar.
+            return Json(loginInfoList, jsonSettings);
         }
+
+
     }
 }

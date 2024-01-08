@@ -15,8 +15,9 @@ namespace SaglikWebUygulamasi1.Controllers
 {
     public class LoginCredentials
     {
-        public int HastaTC { get; set; }
-        public int HastaPassword { get; set; }
+        public string HastaTC { get; set; }
+        public string HastaPassword { get; set; }
+        Hasta Hasta;
     }
 
     public class DefaultController : Controller
@@ -46,8 +47,8 @@ namespace SaglikWebUygulamasi1.Controllers
             TC = inputTC;
 
             // Kullanıcı giriş kontrolü burada yapılır.
-            bool result = KullaniciGirisKontrol(inputTC, inputPassword);
-            //bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
+            //bool result = KullaniciGirisKontrol(inputTC, inputPassword);
+            bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
 
 
             if (result)
@@ -56,7 +57,7 @@ namespace SaglikWebUygulamasi1.Controllers
                 hasta = ent.Hasta.Find(int.Parse(TC));
                 password = int.Parse(inputPassword);
                 // Giriş başarılı ise, kullanıcıyı Index action'ına yönlendir.
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("HastaBilgi", "Default");
             }
             else
             {
@@ -88,7 +89,7 @@ namespace SaglikWebUygulamasi1.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync("https://localhost:44384/api/Loginapi/GetKayitliKullanicilar");
+                var response = await httpClient.GetAsync("https://localhost:44384/api/WebApi/Loginapi/GetKayitliKullanicilar");
 
                 if (response.IsSuccessStatusCode)
                 {
