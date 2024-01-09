@@ -26,10 +26,10 @@
 
         #container {
             background-color: #fff;
-            padding: 20px;
+            padding: 50px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
+            max-width: 1000px;
             width: 100%;
             text-align: center;
         }
@@ -58,16 +58,8 @@
             @Html.AntiForgeryToken()
 
             <p><strong>TC: </strong>@Model.duzenlenecekHastaBilgisi.HastaTC</p>
-            <div class="form-floating mb-3" onclick="toggleInput('ad')">
-                <strong>AD: </strong>
-                <span id="adSpan">@Model.duzenlenecekHastaBilgisi.HastaAd</span>
-                <input type="text" class="form-control" id="adInput" name="ad" value="@Model.duzenlenecekHastaBilgisi.HastaAd" style="display:none;" />
-            </div>
-            <div class="form-floating mb-3" onclick="toggleInput('soyad')">
-                <strong>SOYAD: </strong>
-                <span id="soyadSpan">@Model.duzenlenecekHastaBilgisi.HastaSoyad</span>
-                <input type="text" class="form-control" id="soyadInput" name="soyad" value="@Model.duzenlenecekHastaBilgisi.HastaSoyad" style="display:none;" />
-            </div>
+            <p><strong>AD: </strong>@Model.duzenlenecekHastaBilgisi.HastaAd</p>
+            <p><strong>SOYAD: </strong>@Model.duzenlenecekHastaBilgisi.HastaSoyad</p>
             <div class="form-floating mb-3" onclick="toggleInput('dogumTarihi')">
                 <strong>DOĞUM TARİHİ: </strong>
                 <span id="dogumTarihiSpan">@Model.duzenlenecekHastaBilgisi.HastaDogumTarihi</span>
@@ -78,11 +70,7 @@
                 <span id="yasSpan">@Model.duzenlenecekHastaBilgisi.HastaYas</span>
                 <input type="text" class="form-control" id="yasInput" name="yas" value="@Model.duzenlenecekHastaBilgisi.HastaYas" style="display:none;" />
             </div>
-            <div class="form-floating mb-3" onclick="toggleInput('kanGrubu')">
-                <strong>KAN GRUBU: </strong>
-                <span id="kanGrubuSpan">@Model.duzenlenecekHastaBilgisi.HastaKanGrubu</span>
-                <input type="text" class="form-control" id="kanGrubuInput" name="kanGrubu" value="@Model.duzenlenecekHastaBilgisi.HastaKanGrubu" style="display:none;" />
-            </div>
+            <p><strong>KAN GRUBU: </strong>@Model.duzenlenecekHastaBilgisi.HastaKanGrubu</p>
             <div class="form-floating mb-3" onclick="toggleInput('tel')">
                 <strong>TELEFON NUMARASI: </strong>
                 <span id="telSpan">@Model.duzenlenecekHastaBilgisi.HastaTel</span>

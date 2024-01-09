@@ -20,32 +20,35 @@ namespace SaglikWebUygulamasi1.Controllers
         [Route("GetHastaBilgisi")]
         public IHttpActionResult GetHastaBilgisi(String TC)
         {
-            List<Hasta> model = new List<Hasta>();
-            //model = ent.Hasta.ToList();
+            Hasta model = new Hasta();          //model = ent.Hasta.ToList();
             GelenTC = TC;
-            model = ent.Hasta.Where(a => a.HastaTC.ToString() == TC).ToList();
+            model = ent.Hasta.Find(int.Parse(TC));
 
 
             return GetSomeData(model);
         }
 
         [HttpPost]   //Veri gönderir
-        public void GetHastaBilgisiGuncelle(string ad, string soyad, DateTime dogumTarihi, int yas, string kanGrubu, int tel)
+        [Route("PostHastaBilgisiGuncelle")]
+        public void PostHastaBilgisiGuncelle([FromBody] Hasta model)
         {
             Hasta d = new Hasta();
 
             try
             {
-                d = ent.Hasta.Find(int.Parse(GelenTC));
+                d = ent.Hasta.Find(model.HastaTC);
 
-                d.HastaTC = int.Parse(GelenTC);
-                d.HastaAd = ad;
-                d.HastaSoyad = soyad;
-                d.HastaDogumTarihi = dogumTarihi;
-                d.HastaYas = yas;
-                d.HastaKanGrubu = kanGrubu;
-                d.HastaTel = tel;
+                d.HastaTC = model.HastaTC;
+                d.HastaAd = model.HastaAd;
+                d.HastaSoyad = model.HastaSoyad;
+                d.HastaDogumTarihi = model.HastaDogumTarihi;
+                d.HastaYas = model.HastaYas;
+                d.HastaKanGrubu = model.HastaKanGrubu;
+                d.HastaTel = model.HastaTel;
                 d.HastaCinsiyet = d.HastaCinsiyet;
+
+                System.Diagnostics.Debug.WriteLine(model.HastaTC);
+                System.Diagnostics.Debug.WriteLine(model.HastaAd);
 
                 // Değişiklikleri kaydetme
                 ent.SaveChanges();
@@ -65,9 +68,9 @@ namespace SaglikWebUygulamasi1.Controllers
 
         [HttpGet]   //Veri çeker
         [Route("GetSomeData")]
-        public IHttpActionResult GetSomeData(List<Hasta> model)
+        public IHttpActionResult GetSomeData(Hasta hasta)
         {
-            var hastaInfoList = model.Select(hasta => new Hasta
+            var hastaInfoList = new Hasta
             {
                 HastaTC = hasta.HastaTC,
                 HastaAd = hasta.HastaAd,
@@ -76,8 +79,8 @@ namespace SaglikWebUygulamasi1.Controllers
                 HastaDogumTarihi = hasta.HastaDogumTarihi,
                 HastaYas = hasta.HastaYas,
                 HastaTel = hasta.HastaTel,
-                HastaKanGrubu = hasta.HastaKanGrubu,
-            }).ToList();
+                HastaKanGrubu = hasta.HastaKanGrubu
+            };
 
             var jsonSettings = new JsonSerializerSettings
             {

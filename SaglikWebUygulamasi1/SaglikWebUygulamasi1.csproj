@@ -158,7 +158,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WebApi\LoginapiController.cs" />
     <Compile Include="Controllers\WebApi\RandevuapiController.cs" />
-    <Compile Include="Controllers\WebApi\TahilibilgisiapiController.cs" />
+    <Compile Include="Controllers\WebApi\TahlilbilgisiapiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

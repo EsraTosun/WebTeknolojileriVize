@@ -35,10 +35,12 @@ services:
       default: null
     platform: windows
     ports:
-      - mode: ingress
-        target: 1433
-        published: "1433"
-        protocol: tcp
+      - "1433:1433"  # Veritabanýnýn çalýþtýðý port
+  #  ports:
+   #   - mode: ingress
+    #    target: 1433
+     #   published: "1433"
+      #  protocol: tcp
 
 
  

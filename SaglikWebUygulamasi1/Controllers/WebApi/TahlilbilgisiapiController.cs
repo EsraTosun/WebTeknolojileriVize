@@ -9,8 +9,8 @@ using System.Web.Http;
 
 namespace SaglikWebUygulamasi1.Controllers
 {
-    [RoutePrefix("api/WebApi/Tahilibilgisiapi")]
-    public class TahilibilgisiapiController : ApiController
+    [RoutePrefix("api/WebApi/Tahlilbilgisiapi")]
+    public class TahlilbilgisiapiController : ApiController
     {
 
         SaglikDBEntities ent = new SaglikDBEntities();

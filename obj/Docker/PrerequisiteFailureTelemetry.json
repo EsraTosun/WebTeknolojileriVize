@@ -1,1 +1,1 @@
-{"PrerequisiteCheckName":"Microsoft.Docker.Prerequisites.DockerForWindowsRunningPrerequisite","HasWarning":false,"HasError":true,"Properties":null}
+{"PrerequisiteCheckName":"Microsoft.Docker.Prerequisites.DockerTargetOSCheckPrerequisite","HasWarning":false,"HasError":true,"Properties":"{\"ServerOS\":\"Linux\",\"TargetOS\":\"Windows\"}"}

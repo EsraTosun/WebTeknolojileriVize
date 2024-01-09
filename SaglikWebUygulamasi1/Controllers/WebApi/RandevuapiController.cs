@@ -16,8 +16,8 @@ namespace SaglikWebUygulamasi1.Controllers
         String GelenTC;
 
         [HttpGet]   //Veri çeker
-        [Route("GetTRandevu")]
-        public IHttpActionResult GetTRandevu(String TC)
+        [Route("GetRandevu")]
+        public IHttpActionResult GetRandevu(String TC)
         {
             List<Randevu> model = new List<Randevu>();
             //model = ent.Hasta.ToList();
