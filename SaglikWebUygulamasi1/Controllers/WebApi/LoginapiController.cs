@@ -26,15 +26,14 @@ namespace SaglikWebUygulamasi1.Controllers
 
         [HttpPost]   //Veri gönderir
         [Route("PostKullaniciGuncelle")]
-        public void PostKullaniciGuncelle(string TC, string password)
+        public void PostKullaniciGuncelle([FromBody] Login model)
         {
             Login d = new Login();
-
-            d = ent.Login.Find(int.Parse(TC));
-            d.HastaTC = int.Parse(TC);
-            d.HastaPassword = int.Parse(password);
-            System.Diagnostics.Debug.WriteLine(TC);
-            System.Diagnostics.Debug.WriteLine(password);
+            d = ent.Login.Find(model.HastaTC);
+            d.HastaTC = model.HastaTC;
+            d.HastaPassword = model.HastaPassword;
+            System.Diagnostics.Debug.WriteLine(model.HastaTC);
+            System.Diagnostics.Debug.WriteLine(model.HastaPassword);
 
 
             ent.SaveChanges();
@@ -42,7 +41,7 @@ namespace SaglikWebUygulamasi1.Controllers
 
         [HttpPost]   //Veri gönderir
         [Route("PostKullaniciEkle")]
-        public void PostKullaniciEkle(Login model)
+        public void PostKullaniciEkle([FromBody] Login model)
         {
             if(ModelState.IsValid) 
             {

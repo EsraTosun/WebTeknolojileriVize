@@ -6,6 +6,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -154,23 +155,31 @@ namespace SaglikWebUygulamasi1.Controllers
                     {
                         string apiUrl = "https://localhost:44384/api/WebApi/Loginapi/PostKullaniciGuncelle";
 
-                        // İsteği oluştur
-                        var content2 = new FormUrlEncodedContent(new[]
-                        {
-                            new KeyValuePair<string, string>("TC", TC) ,// TC ve password değerlerini uygun şekilde doldurun
-                            new KeyValuePair<string, string>("password", password.ToString())
-                        }) ;
-                        // İsteği gönder ve cevabı al
-                        HttpResponseMessage response2 = await client.PostAsync(apiUrl, content2);
+                        var data = new { HastaTC = username, HastaPassword = password };
+                        var json = JsonConvert.SerializeObject(data);
 
-                        // Cevabı kontrol et
-                        if (response2.IsSuccessStatusCode)
+                        // İsteği oluştur
+                        var content2 = new StringContent(json, Encoding.UTF8, "application/json");
+
+                        // İsteği gönder ve cevabı al
+                        try
                         {
-                            System.Diagnostics.Debug.WriteLine("Veri güncelleme başarılı!");
+                            // İsteği gönder ve cevabı al
+                            HttpResponseMessage response2 = await client.PostAsync(apiUrl, content2);
+
+                            // Cevabı kontrol et
+                            if (response2.IsSuccessStatusCode)
+                            {
+                                System.Diagnostics.Debug.WriteLine("Veri güncelleme başarılı!");
+                            }
+                            else
+                            {
+                                System.Diagnostics.Debug.WriteLine($"Hata kodu: {response2.StatusCode}, Hata açıklaması: {response2.ReasonPhrase}");
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            System.Diagnostics.Debug.WriteLine($"Hata kodu: {response2.StatusCode}");
+                            System.Diagnostics.Debug.WriteLine($"İstek gönderilirken bir hata oluştu: {ex.Message}");
                         }
                     }
                     return true;
@@ -178,6 +187,63 @@ namespace SaglikWebUygulamasi1.Controllers
             }
            
             return false; // Örnek olarak her zaman başarılı dönüş yapalım.
+        }
+
+        public ActionResult YeniKayit()
+        {
+            YeniKayitClass model = new YeniKayitClass();
+
+            model.loginList = ent.Login.ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> YeniKayitEkle(String yeniKullaniciTC, String yeniKullaniciPassword)
+        {
+            // Kullanıcıyı veritabanında kontrol et
+            bool kullaniciVarMi = ent.Login.Any(x => x.HastaTC.ToString() == yeniKullaniciTC);
+
+            if (kullaniciVarMi)
+            {
+                // Kullanıcı zaten var, uyarı ver
+                TempData["Uyari"] = "Bu TC numarasına sahip bir kullanıcı zaten kayıtlı.";
+                return RedirectToAction("Login", "Default");
+            }
+            using (HttpClient client = new HttpClient())
+            {
+                string apiUrl = "https://localhost:44384/api/WebApi/Loginapi/PostKullaniciEkle";
+
+                var data = new { HastaTC = int.Parse(yeniKullaniciTC), HastaPassword = yeniKullaniciPassword };
+                var json = JsonConvert.SerializeObject(data);
+
+                // İsteği oluştur
+                var content2 = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // İsteği gönder ve cevabı al
+                try
+                {
+                    // İsteği gönder ve cevabı al
+                    HttpResponseMessage response2 = await client.PostAsync(apiUrl, content2);
+
+                    // Cevabı kontrol et
+                    if (response2.IsSuccessStatusCode)
+                    {
+                        TC = yeniKullaniciTC;
+                        System.Diagnostics.Debug.WriteLine("Veri ekleme başarılı!");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Hata kodu: {response2.StatusCode}, Hata açıklaması: {response2.ReasonPhrase}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"İstek gönderilirken bir hata oluştu: {ex.Message}");
+                }
+            }
+
+            return RedirectToAction("HastaBilgi", "Default");
         }
 
         public async Task<ActionResult> Hastaneler()
@@ -236,40 +302,6 @@ namespace SaglikWebUygulamasi1.Controllers
 
             model = ent.HastalikBilgisi.Where(a => a.HastaTC.ToString() == TC).ToList();
             return View(model);
-        }
-
-        public ActionResult YeniKayit()
-        {
-            YeniKayitClass model = new YeniKayitClass();
-
-            model.loginList = ent.Login.ToList();
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult YeniKayitEkle(String yeniKullaniciTC, String yeniKullaniciPassword)
-        {
-            // Kullanıcıyı veritabanında kontrol et
-            bool kullaniciVarMi = ent.Login.Any(x => x.HastaTC.ToString() == yeniKullaniciTC);
-
-            if (kullaniciVarMi)
-            {
-                // Kullanıcı zaten var, uyarı ver
-                TempData["Uyari"] = "Bu TC numarasına sahip bir kullanıcı zaten kayıtlı.";
-                return RedirectToAction("Login", "Default");
-            }
-
-            Login m = new Login();
-
-            m.HastaTC = int.Parse(yeniKullaniciTC);
-            m.HastaPassword = int.Parse(yeniKullaniciPassword);
-            TC = yeniKullaniciTC;
-
-            ent.Login.Add(m);
-            ent.SaveChanges();
-
-            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult HastaBilgi()
@@ -349,16 +381,42 @@ namespace SaglikWebUygulamasi1.Controllers
         }
 
         [HttpPost]
-        public ActionResult SifreGuncelleme(int password)
+        public async Task<ActionResult> SifreGuncelleme(int password)
         {
             Login d = new Login();
 
+            using (HttpClient client = new HttpClient())
+            {
+                string apiUrl = "https://localhost:44384/api/WebApi/Loginapi/PostKullaniciGuncelle";
+
+                var data = new { HastaTC = int.Parse(TC), HastaPassword = password };
+                var json = JsonConvert.SerializeObject(data);
+
+                // İsteği oluştur
+                var content2 = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // İsteği gönder ve cevabı al
+                try
+                {
+                    // İsteği gönder ve cevabı al
+                    HttpResponseMessage response2 = await client.PostAsync(apiUrl, content2);
+
+                    // Cevabı kontrol et
+                    if (response2.IsSuccessStatusCode)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Veri güncelleme başarılı!");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Hata kodu: {response2.StatusCode}, Hata açıklaması: {response2.ReasonPhrase}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"İstek gönderilirken bir hata oluştu: {ex.Message}");
+                }
+            }
             d = ent.Login.Find(int.Parse(TC));
-
-            d.HastaTC = int.Parse(TC);
-            d.HastaPassword = password;
-
-            ent.SaveChanges();
 
             return View(d);
         }
