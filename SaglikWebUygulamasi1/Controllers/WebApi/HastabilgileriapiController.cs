@@ -87,9 +87,9 @@ namespace SaglikWebUygulamasi1.Controllers
                                                                // Başka yapılandırma seçenekleri
             };
 
-            var json = JsonConvert.SerializeObject(hastaInfoList, Formatting.Indented, jsonSettings);
-
-            return Json(json);
+            // JSON içeriğini içeren bir HttpResponseMessage döndürüyoruz.
+            // Bu, Web API'nin istemcilere JSON formatında veri göndermesini sağlar.
+            return Json(hastaInfoList, jsonSettings);
         }
     }
 }

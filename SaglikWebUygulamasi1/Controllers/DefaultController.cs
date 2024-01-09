@@ -48,7 +48,7 @@ namespace SaglikWebUygulamasi1.Controllers
 
             // Kullanıcı giriş kontrolü burada yapılır.
             //bool result = KullaniciGirisKontrol(inputTC, inputPassword);
-            bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
+            bool result = await KullaniciGirisKontrol(inputTC, inputPassword);
 
 
             if (result)
@@ -66,26 +66,7 @@ namespace SaglikWebUygulamasi1.Controllers
             }
         }
 
-        private bool KullaniciGirisKontrol(string username, string password)
-        {
-            List<Login> model = new List<Login>();
-            model = ent.Login.ToList();
-
-            foreach (var item in model)
-            {
-                if (@item.HastaTC.ToString() == username && @item.HastaPassword.ToString() == password)
-                {
-                    return true;
-                }
-            }
-
-            // Kullanıcı giriş kontrolü gerçekleştirilir.
-            // Bu metot, kullanıcı girişi başarılı ise true, aksi halde false dönmelidir.
-            // Giriş kontrolü işlemleri burada gerçekleştirilir.
-            return false; // Örnek olarak her zaman başarılı dönüş yapalım.
-        }
-
-        private async Task<bool> KullaniciGirisKontrol1(string username, string password)
+        private async Task<bool> KullaniciGirisKontrol(string username, string password)
         {
             using (var httpClient = new HttpClient())
             {
@@ -137,7 +118,7 @@ namespace SaglikWebUygulamasi1.Controllers
             TC = inputTC;
 
             // Kullanıcı giriş kontrolü burada yapılır.
-            bool result = KullaniciSifreUnuttum(inputTC,inputDogumTarihi, inputPassword);
+            bool result = await KullaniciSifreUnuttum(inputTC,inputDogumTarihi, inputPassword);
             //bool result = await KullaniciGirisKontrol1(inputTC, inputPassword);
 
 
@@ -145,7 +126,7 @@ namespace SaglikWebUygulamasi1.Controllers
             {
                 TC = inputTC;
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("HastaBilgi", "Default");
             }
             else
             {
@@ -154,23 +135,44 @@ namespace SaglikWebUygulamasi1.Controllers
             }
         }
 
-        private bool KullaniciSifreUnuttum(string username,DateTime dogumTarihi, int password)
+        private async Task<bool> KullaniciSifreUnuttum(string username,DateTime dogumTarihi, int password)
         {
-            List<Login> model = new List<Login>();
-            model = ent.Login.ToList();
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync("https://localhost:44384/api/WebApi/Loginapi/GetKayitliKullanicilar");
+            var content = await response.Content.ReadAsStringAsync();
+            List<Login> modelList = new List<Login>();
+            // Doğrudan bir dizi olarak deserializasyon yap
+            modelList = JsonConvert.DeserializeObject<List<Login>>(content);
+            //model = ent.Login.ToList();
 
-            foreach (var item in model)
+            foreach (var item in modelList)
             {
                 if (@item.HastaTC.ToString() == username && @item.Hasta.HastaDogumTarihi.Date == dogumTarihi.Date)
                 {
-                    Login d = new Login();
 
-                    d = ent.Login.Find(int.Parse(TC));
+                    using (HttpClient client = new HttpClient())
+                    {
+                        string apiUrl = "https://localhost:44384/api/WebApi/Loginapi/PostKullaniciGuncelle";
 
-                    d.HastaTC = int.Parse(TC);
-                    d.HastaPassword = password;
+                        // İsteği oluştur
+                        var content2 = new FormUrlEncodedContent(new[]
+                        {
+                            new KeyValuePair<string, string>("TC", TC) ,// TC ve password değerlerini uygun şekilde doldurun
+                            new KeyValuePair<string, string>("password", password.ToString())
+                        }) ;
+                        // İsteği gönder ve cevabı al
+                        HttpResponseMessage response2 = await client.PostAsync(apiUrl, content2);
 
-                    ent.SaveChanges();
+                        // Cevabı kontrol et
+                        if (response2.IsSuccessStatusCode)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Veri güncelleme başarılı!");
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Hata kodu: {response2.StatusCode}");
+                        }
+                    }
                     return true;
                 }
             }
@@ -182,8 +184,8 @@ namespace SaglikWebUygulamasi1.Controllers
         {
             List<Hastane> model = new List<Hastane>();
 
-            //model = await HastaneGet();
-            model = ent.Hastane.ToList();
+            model = await HastaneGet();
+            //model = ent.Hastane.ToList();
             return View(model);
         }
 
@@ -194,7 +196,7 @@ namespace SaglikWebUygulamasi1.Controllers
             using (var httpClient = new HttpClient())
             {
                 //List<Hastane> model = new List<Hastane>();
-                var response = await httpClient.GetAsync("https://localhost:44384/api/Hastaneapi/GetHastane");
+                var response = await httpClient.GetAsync("https://localhost:44384/api/WebApi/Hastaneapi/GetHastane");
 
                 if (response.IsSuccessStatusCode)
                 {

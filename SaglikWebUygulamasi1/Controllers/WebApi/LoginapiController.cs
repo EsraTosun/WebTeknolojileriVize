@@ -25,6 +25,23 @@ namespace SaglikWebUygulamasi1.Controllers
         }
 
         [HttpPost]   //Veri gönderir
+        [Route("PostKullaniciGuncelle")]
+        public void PostKullaniciGuncelle(string TC, string password)
+        {
+            Login d = new Login();
+
+            d = ent.Login.Find(int.Parse(TC));
+            d.HastaTC = int.Parse(TC);
+            d.HastaPassword = int.Parse(password);
+            System.Diagnostics.Debug.WriteLine(TC);
+            System.Diagnostics.Debug.WriteLine(password);
+
+
+            ent.SaveChanges();
+        }
+
+        [HttpPost]   //Veri gönderir
+        [Route("PostKullaniciEkle")]
         public void PostKullaniciEkle(Login model)
         {
             if(ModelState.IsValid) 
@@ -45,7 +62,7 @@ namespace SaglikWebUygulamasi1.Controllers
             {
                 HastaTC = login.HastaTC,
                 HastaPassword = login.HastaPassword,
-                Hasta = null,
+                Hasta = login.Hasta,
             }).ToList();
 
             // JSON serileştirme ayarlarını yapılandırıyoruz.

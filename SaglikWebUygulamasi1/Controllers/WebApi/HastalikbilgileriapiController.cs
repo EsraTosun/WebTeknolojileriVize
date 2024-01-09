@@ -54,9 +54,8 @@ namespace SaglikWebUygulamasi1.Controllers
                                                                // Başka yapılandırma seçenekleri
             };
 
-            var json = JsonConvert.SerializeObject(hastalikBilgisiInfoList, Formatting.Indented, jsonSettings);
 
-            return Json(json);
+            return Json(hastalikBilgisiInfoList, jsonSettings);
         }
     }
 }
