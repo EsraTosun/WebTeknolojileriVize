@@ -61,7 +61,7 @@ namespace SaglikWebUygulamasi1.Controllers
             {
                 HastaTC = login.HastaTC,
                 HastaPassword = login.HastaPassword,
-                Hasta = login.Hasta,
+                Hasta = null,
             }).ToList();
 
             // JSON serileştirme ayarlarını yapılandırıyoruz.
